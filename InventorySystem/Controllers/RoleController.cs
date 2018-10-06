@@ -10,116 +10,111 @@ using InventorySystem.DataBase;
 
 namespace InventorySystem.Controllers
 {
-    public class UserController : Controller
+    public class RoleController : Controller
     {
         private InventorySystemEntities db = new InventorySystemEntities();
 
-        // GET: User
+        // GET: Role
         public ActionResult Index()
         {
-            var user_t = db.User_t.Include(u => u.Role_t);
-            return View(user_t.ToList());
+            return View(db.Role_t.ToList());
         }
 
-        // GET: User/Details/5
+        // GET: Role/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User_t user_t = db.User_t.Find(id);
-            if (user_t == null)
+            Role_t role_t = db.Role_t.Find(id);
+            if (role_t == null)
             {
                 return HttpNotFound();
             }
-            return View(user_t);
+            return View(role_t);
         }
 
-        // GET: User/Create
+        // GET: Role/Create
         public ActionResult Create()
         {
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description");
             return View();
         }
 
-        // POST: User/Create
+        // POST: Role/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "user_id,email,password,role_id,last_update_date,creation_Date,last_user_update")] User_t user_t)
+        public ActionResult Create([Bind(Include = "role_id,description,last_update_date,creation_Date,last_user_update")] Role_t role_t)
         {
             if (ModelState.IsValid)
             {
-                user_t.creation_Date = DateTime.Now;
-                user_t.last_user_update = User.Identity.Name;
-                db.User_t.Add(user_t);
+                role_t.creation_Date = DateTime.Now;
+                role_t.last_user_update = User.Identity.Name;
+                db.Role_t.Add(role_t);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description", user_t.role_id);
-            return View(user_t);
+            return View(role_t);
         }
 
-        // GET: User/Edit/5
+        // GET: Role/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User_t user_t = db.User_t.Find(id);
-            if (user_t == null)
+            Role_t role_t = db.Role_t.Find(id);
+            if (role_t == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description", user_t.role_id);
-            return View(user_t);
+            return View(role_t);
         }
 
-        // POST: User/Edit/5
+        // POST: Role/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "user_id,email,password,role_id")] User_t user_t)
+        public ActionResult Edit([Bind(Include = "role_id,description")] Role_t role_t)
         {
             if (ModelState.IsValid)
             {
-                user_t.last_update_date = DateTime.Now;
-                user_t.last_user_update = User.Identity.Name;
-                db.Entry(user_t).State = EntityState.Modified;
+                role_t.last_update_date = DateTime.Now;
+                role_t.last_user_update = User.Identity.Name;
+                db.Entry(role_t).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description", user_t.role_id);
-            return View(user_t);
+            return View(role_t);
         }
 
-        // GET: User/Delete/5
+        // GET: Role/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User_t user_t = db.User_t.Find(id);
-            if (user_t == null)
+            Role_t role_t = db.Role_t.Find(id);
+            if (role_t == null)
             {
                 return HttpNotFound();
             }
-            return View(user_t);
+            return View(role_t);
         }
 
-        // POST: User/Delete/5
+        // POST: Role/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User_t user_t = db.User_t.Find(id);
-            db.User_t.Remove(user_t);
+            Role_t role_t = db.Role_t.Find(id);
+            db.Role_t.Remove(role_t);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
