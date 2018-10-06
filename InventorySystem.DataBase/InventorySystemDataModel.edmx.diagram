@@ -18,6 +18,7 @@
         <AssociationConnector Association="InventorySystemModel.pk_product_unit" ManuallyRouted="false" />
         <AssociationConnector Association="InventorySystemModel.pk_product_warehouse" ManuallyRouted="false" />
         <AssociationConnector Association="InventorySystemModel.pk_user_role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InventorySystemModel.inventario_v" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -32,5 +32,6 @@ namespace InventorySystem.DataBase
         public virtual DbSet<Unit_t> Unit_t { get; set; }
         public virtual DbSet<User_t> User_t { get; set; }
         public virtual DbSet<Warehouse_t> Warehouse_t { get; set; }
+        public virtual DbSet<inventario_v> inventario_v { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using InventorySystem.DataBase;
 
 namespace InventorySystem.Controllers
 {
-    public class Product_tController : Controller
+    public class ProductController : Controller
     {
         private InventorySystemEntities db = new InventorySystemEntities();
 

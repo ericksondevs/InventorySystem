@@ -43,11 +43,11 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse"  data-navigation="true" id="navbarSupportedContent">
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link waves-effect" href="@Url.Action("Index", "Home")" target="_blank">
+                            <a class="nav-link waves-effect" href="@Url.Action("Index", "Home")">
                                 Inicio
                                 <span class="sr-only">(current)</span>
                             </a>
@@ -56,8 +56,8 @@
                         <li class="nav-item dropdown ">
                             <a class="nav-item  nav-link waves-effect dropdown-toggle" data-toggle="dropdown">Seguridad<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("Index", "User",new { target = "_blank" })">Usuarios</a></li>
-                                <li><a href="@Url.Action("Index", "Role",new { target = "_blank" })">Roles</a></li>
+                                <li><a href="@Url.Action("Index", "User")">Usuarios</a></li>
+                                <li><a href="@Url.Action("Index", "Role")">Roles</a></li>
                             </ul>
                         </li>
 
@@ -110,25 +110,28 @@ id = "loginLink"
                 <img src="~/img/logo.jpg" class="img-fluid" alt="">
             </a>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item active waves-effect">
-                    <i class="fa fa-pie-chart mr-3"></i>Inventario
+                <a href="@Url.Action("Index", "Home")" class="list-group-item active waves-effect">
+                    <i class="fa fa-money mr-3"></i>Inventario
                 </a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-user mr-3"></i>Almacenes
+                <a href="@Url.Action("Index", "Warehouse")" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-pie-chart mr-3"></i>Almacenes
                 </a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                <a href="@Url.Action("Index", "Unit")" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fas fa-boxes mr-3"></i>Unidades
+                </a>
+                <a href="@Url.Action("Index", "Category")" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-bars mr-3"></i>Categoria
                 </a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                <a href="@Url.Action("Index", "Product")" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-table mr-3"></i>Productos
                 </a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-money mr-3"></i>Ventas
+                <a href="@Url.Action("Index", "Employee")" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-user mr-3"></i>Empleados
                 </a>
-                <a href="@Url.Action("Index", "User",new { target = "_blank" })" class="list-group-item list-group-item-action waves-effect" target="_blank">
-                    <i class="fa fa-map mr-3"></i>
-                    Usuarios
-                </a>
+                @*<a href="#" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-money mr-3"></i>Ventas
+        </a>*@
+
             </div>
         </div>
         <!-- Sidebar -->
@@ -166,7 +169,7 @@ id = "loginLink"
     </main>
     <!--Main layout-->
     <!--Footer-->
-    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+    <footer class="page-footer  text-center  font-small primary-color-dark darken-2 mt-4 wow fadeIn">
         <!--Call to action-->
         <div class="pt-4">
 

@@ -10,107 +10,107 @@ using InventorySystem.DataBase;
 
 namespace InventorySystem.Controllers
 {
-    public class Category_tController : Controller
+    public class UnitController : Controller
     {
         private InventorySystemEntities db = new InventorySystemEntities();
 
-        // GET: Category_t
+        // GET: Unit
         public ActionResult Index()
         {
-            return View(db.Category_t.ToList());
+            return View(db.Unit_t.ToList());
         }
 
-        // GET: Category_t/Details/5
+        // GET: Unit/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category_t category_t = db.Category_t.Find(id);
-            if (category_t == null)
+            Unit_t unit_t = db.Unit_t.Find(id);
+            if (unit_t == null)
             {
                 return HttpNotFound();
             }
-            return View(category_t);
+            return View(unit_t);
         }
 
-        // GET: Category_t/Create
+        // GET: Unit/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Category_t/Create
+        // POST: Unit/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "category_id,name,description,last_update_date,creation_Date,last_user_update")] Category_t category_t)
+        public ActionResult Create([Bind(Include = "unit_id,description,last_update_date,creation_Date,last_user_update")] Unit_t unit_t)
         {
             if (ModelState.IsValid)
             {
-                db.Category_t.Add(category_t);
+                db.Unit_t.Add(unit_t);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category_t);
+            return View(unit_t);
         }
 
-        // GET: Category_t/Edit/5
+        // GET: Unit/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category_t category_t = db.Category_t.Find(id);
-            if (category_t == null)
+            Unit_t unit_t = db.Unit_t.Find(id);
+            if (unit_t == null)
             {
                 return HttpNotFound();
             }
-            return View(category_t);
+            return View(unit_t);
         }
 
-        // POST: Category_t/Edit/5
+        // POST: Unit/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "category_id,name,description,last_update_date,creation_Date,last_user_update")] Category_t category_t)
+        public ActionResult Edit([Bind(Include = "unit_id,description,last_update_date,creation_Date,last_user_update")] Unit_t unit_t)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category_t).State = EntityState.Modified;
+                db.Entry(unit_t).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category_t);
+            return View(unit_t);
         }
 
-        // GET: Category_t/Delete/5
+        // GET: Unit/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category_t category_t = db.Category_t.Find(id);
-            if (category_t == null)
+            Unit_t unit_t = db.Unit_t.Find(id);
+            if (unit_t == null)
             {
                 return HttpNotFound();
             }
-            return View(category_t);
+            return View(unit_t);
         }
 
-        // POST: Category_t/Delete/5
+        // POST: Unit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category_t category_t = db.Category_t.Find(id);
-            db.Category_t.Remove(category_t);
+            Unit_t unit_t = db.Unit_t.Find(id);
+            db.Unit_t.Remove(unit_t);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

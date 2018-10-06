@@ -55,6 +55,9 @@
     <Compile Include="Employee_t.cs">
       <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="inventario_v.cs">
+      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="InventorySystemDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

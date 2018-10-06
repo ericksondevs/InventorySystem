@@ -4,200 +4,219 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InventorySystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="InventorySystemModelStoreContainer">
-    <EntitySet Name="Category_t" EntityType="InventorySystemModel.Store.Category_t" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Employee_t" EntityType="InventorySystemModel.Store.Employee_t" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Product_t" EntityType="InventorySystemModel.Store.Product_t" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Role_t" EntityType="InventorySystemModel.Store.Role_t" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Unit_t" EntityType="InventorySystemModel.Store.Unit_t" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="User_t" EntityType="InventorySystemModel.Store.User_t" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Warehouse_t" EntityType="InventorySystemModel.Store.Warehouse_t" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="pk_product_caterogy" Association="InventorySystemModel.Store.pk_product_caterogy">
-      <End Role="Category_t" EntitySet="Category_t" />
-      <End Role="Product_t" EntitySet="Product_t" />
-    </AssociationSet>
-    <AssociationSet Name="pk_employee_user" Association="InventorySystemModel.Store.pk_employee_user">
-      <End Role="User_t" EntitySet="User_t" />
-      <End Role="Employee_t" EntitySet="Employee_t" />
-    </AssociationSet>
-    <AssociationSet Name="pk_employee_warehouse" Association="InventorySystemModel.Store.pk_employee_warehouse">
-      <End Role="Warehouse_t" EntitySet="Warehouse_t" />
-      <End Role="Employee_t" EntitySet="Employee_t" />
-    </AssociationSet>
-    <AssociationSet Name="pk_product_unit" Association="InventorySystemModel.Store.pk_product_unit">
-      <End Role="Unit_t" EntitySet="Unit_t" />
-      <End Role="Product_t" EntitySet="Product_t" />
-    </AssociationSet>
-    <AssociationSet Name="pk_product_warehouse" Association="InventorySystemModel.Store.pk_product_warehouse">
-      <End Role="Warehouse_t" EntitySet="Warehouse_t" />
-      <End Role="Product_t" EntitySet="Product_t" />
-    </AssociationSet>
-    <AssociationSet Name="pk_user_role" Association="InventorySystemModel.Store.pk_user_role">
-      <End Role="Role_t" EntitySet="Role_t" />
-      <End Role="User_t" EntitySet="User_t" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Category_t">
-    <Key>
-      <PropertyRef Name="category_id" />
-    </Key>
-    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="description" Type="varchar" Nullable="true" MaxLength="200" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="Employee_t">
-    <Key>
-      <PropertyRef Name="employee_id" />
-    </Key>
-    <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="first_name" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="last_name_1" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="last_name_2" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="identification" Type="int" Nullable="false" />
-    <Property Name="address" Type="varchar" Nullable="true" MaxLength="200" />
-    <Property Name="hiring_date" Type="datetime" Nullable="true" />
-    <Property Name="user_id" Type="int" Nullable="true" />
-    <Property Name="warehouse_id" Type="int" Nullable="true" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="Product_t">
-    <Key>
-      <PropertyRef Name="product_id" />
-    </Key>
-    <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="description" Type="varchar" Nullable="true" MaxLength="200" />
-    <Property Name="price" Type="decimal" Nullable="false" Precision="9" Scale="2" />
-    <Property Name="existence" Type="decimal" Nullable="false" Precision="9" Scale="2" />
-    <Property Name="unit_id" Type="int" Nullable="true" />
-    <Property Name="category_id" Type="int" Nullable="true" />
-    <Property Name="warehouse_id" Type="int" Nullable="true" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="Role_t">
-    <Key>
-      <PropertyRef Name="role_id" />
-    </Key>
-    <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="Unit_t">
-    <Key>
-      <PropertyRef Name="unit_id" />
-    </Key>
-    <Property Name="unit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="description" Type="varchar" Nullable="true" MaxLength="100" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="User_t">
-    <Key>
-      <PropertyRef Name="user_id" />
-    </Key>
-    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="email" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="password" Type="varchar" Nullable="false" MaxLength="200" />
-    <Property Name="role_id" Type="int" Nullable="true" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="Warehouse_t">
-    <Key>
-      <PropertyRef Name="warehouse_id" />
-    </Key>
-    <Property Name="warehouse_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" Nullable="false" MaxLength="200" />
-    <Property Name="address" Type="varchar" Nullable="true" MaxLength="200" />
-    <Property Name="last_update_date" Type="datetime" Nullable="true" />
-    <Property Name="creation_Date" Type="datetime" Nullable="true" />
-    <Property Name="last_user_update" Type="varchar" Nullable="true" MaxLength="100" />
-  </EntityType>
-  <Association Name="pk_product_caterogy">
-    <End Role="Category_t" Type="InventorySystemModel.Store.Category_t" Multiplicity="0..1" />
-    <End Role="Product_t" Type="InventorySystemModel.Store.Product_t" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category_t">
-        <PropertyRef Name="category_id" />
-      </Principal>
-      <Dependent Role="Product_t">
-        <PropertyRef Name="category_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="pk_employee_user">
-    <End Role="User_t" Type="InventorySystemModel.Store.User_t" Multiplicity="0..1" />
-    <End Role="Employee_t" Type="InventorySystemModel.Store.Employee_t" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User_t">
-        <PropertyRef Name="user_id" />
-      </Principal>
-      <Dependent Role="Employee_t">
-        <PropertyRef Name="user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="pk_employee_warehouse">
-    <End Role="Warehouse_t" Type="InventorySystemModel.Store.Warehouse_t" Multiplicity="0..1" />
-    <End Role="Employee_t" Type="InventorySystemModel.Store.Employee_t" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Warehouse_t">
-        <PropertyRef Name="warehouse_id" />
-      </Principal>
-      <Dependent Role="Employee_t">
-        <PropertyRef Name="warehouse_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="pk_product_unit">
-    <End Role="Unit_t" Type="InventorySystemModel.Store.Unit_t" Multiplicity="0..1" />
-    <End Role="Product_t" Type="InventorySystemModel.Store.Product_t" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Unit_t">
-        <PropertyRef Name="unit_id" />
-      </Principal>
-      <Dependent Role="Product_t">
-        <PropertyRef Name="unit_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="pk_product_warehouse">
-    <End Role="Warehouse_t" Type="InventorySystemModel.Store.Warehouse_t" Multiplicity="0..1" />
-    <End Role="Product_t" Type="InventorySystemModel.Store.Product_t" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Warehouse_t">
-        <PropertyRef Name="warehouse_id" />
-      </Principal>
-      <Dependent Role="Product_t">
-        <PropertyRef Name="warehouse_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="pk_user_role">
-    <End Role="Role_t" Type="InventorySystemModel.Store.Role_t" Multiplicity="0..1" />
-    <End Role="User_t" Type="InventorySystemModel.Store.User_t" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Role_t">
-        <PropertyRef Name="role_id" />
-      </Principal>
-      <Dependent Role="User_t">
-        <PropertyRef Name="role_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="InventorySystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category_t">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employee_t">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name_1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name_2" Type="varchar" MaxLength="100" />
+          <Property Name="identification" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="200" />
+          <Property Name="hiring_date" Type="date" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="warehouse_id" Type="int" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Product_t">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="price" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="existence" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="unit_id" Type="int" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="warehouse_id" Type="int" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Role_t">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Unit_t">
+          <Key>
+            <PropertyRef Name="unit_id" />
+          </Key>
+          <Property Name="unit_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="User_t">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="role_id" Type="int" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Warehouse_t">
+          <Key>
+            <PropertyRef Name="warehouse_id" />
+          </Key>
+          <Property Name="warehouse_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="200" />
+          <Property Name="last_update_date" Type="date" />
+          <Property Name="creation_Date" Type="date" />
+          <Property Name="last_user_update" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'InventorySystem.dbo.inventario_v' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="inventario_v">
+          <Key>
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="Almacen" />
+            <PropertyRef Name="Categoria" />
+          </Key>
+          <Property Name="Producto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Almacen" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Categoria" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="pk_employee_user">
+          <End Role="User_t" Type="Self.User_t" Multiplicity="0..1" />
+          <End Role="Employee_t" Type="Self.Employee_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_t">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Employee_t">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pk_employee_warehouse">
+          <End Role="Warehouse_t" Type="Self.Warehouse_t" Multiplicity="0..1" />
+          <End Role="Employee_t" Type="Self.Employee_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse_t">
+              <PropertyRef Name="warehouse_id" />
+            </Principal>
+            <Dependent Role="Employee_t">
+              <PropertyRef Name="warehouse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pk_product_caterogy">
+          <End Role="Category_t" Type="Self.Category_t" Multiplicity="0..1" />
+          <End Role="Product_t" Type="Self.Product_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_t">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Product_t">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pk_product_unit">
+          <End Role="Unit_t" Type="Self.Unit_t" Multiplicity="0..1" />
+          <End Role="Product_t" Type="Self.Product_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit_t">
+              <PropertyRef Name="unit_id" />
+            </Principal>
+            <Dependent Role="Product_t">
+              <PropertyRef Name="unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pk_product_warehouse">
+          <End Role="Warehouse_t" Type="Self.Warehouse_t" Multiplicity="0..1" />
+          <End Role="Product_t" Type="Self.Product_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse_t">
+              <PropertyRef Name="warehouse_id" />
+            </Principal>
+            <Dependent Role="Product_t">
+              <PropertyRef Name="warehouse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pk_user_role">
+          <End Role="Role_t" Type="Self.Role_t" Multiplicity="0..1" />
+          <End Role="User_t" Type="Self.User_t" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_t">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="User_t">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventorySystemModelStoreContainer">
+          <EntitySet Name="Category_t" EntityType="Self.Category_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_t" EntityType="Self.Employee_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_t" EntityType="Self.Product_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role_t" EntityType="Self.Role_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit_t" EntityType="Self.Unit_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_t" EntityType="Self.User_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse_t" EntityType="Self.Warehouse_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inventario_v" EntityType="Self.inventario_v" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [inventario_v].[Producto] AS [Producto], 
+    [inventario_v].[Almacen] AS [Almacen], 
+    [inventario_v].[Categoria] AS [Categoria]
+    FROM [dbo].[inventario_v] AS [inventario_v]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="pk_employee_user" Association="Self.pk_employee_user">
+            <End Role="User_t" EntitySet="User_t" />
+            <End Role="Employee_t" EntitySet="Employee_t" />
+          </AssociationSet>
+          <AssociationSet Name="pk_employee_warehouse" Association="Self.pk_employee_warehouse">
+            <End Role="Warehouse_t" EntitySet="Warehouse_t" />
+            <End Role="Employee_t" EntitySet="Employee_t" />
+          </AssociationSet>
+          <AssociationSet Name="pk_product_caterogy" Association="Self.pk_product_caterogy">
+            <End Role="Category_t" EntitySet="Category_t" />
+            <End Role="Product_t" EntitySet="Product_t" />
+          </AssociationSet>
+          <AssociationSet Name="pk_product_unit" Association="Self.pk_product_unit">
+            <End Role="Unit_t" EntitySet="Unit_t" />
+            <End Role="Product_t" EntitySet="Product_t" />
+          </AssociationSet>
+          <AssociationSet Name="pk_product_warehouse" Association="Self.pk_product_warehouse">
+            <End Role="Warehouse_t" EntitySet="Warehouse_t" />
+            <End Role="Product_t" EntitySet="Product_t" />
+          </AssociationSet>
+          <AssociationSet Name="pk_user_role" Association="Self.pk_user_role">
+            <End Role="Role_t" EntitySet="Role_t" />
+            <End Role="User_t" EntitySet="User_t" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventorySystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -404,7 +423,18 @@
             <End Role="Role_t" EntitySet="Role_t" />
             <End Role="User_t" EntitySet="User_t" />
           </AssociationSet>
+          <EntitySet Name="inventario_v" EntityType="InventorySystemModel.inventario_v" />
         </EntityContainer>
+        <EntityType Name="inventario_v">
+          <Key>
+            <PropertyRef Name="Producto" />
+            <PropertyRef Name="Almacen" />
+            <PropertyRef Name="Categoria" />
+          </Key>
+          <Property Name="Producto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Almacen" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -505,6 +535,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="inventario_v">
+            <EntityTypeMapping TypeName="InventorySystemModel.inventario_v">
+              <MappingFragment StoreEntitySet="inventario_v">
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Almacen" ColumnName="Almacen" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

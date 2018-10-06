@@ -1,13 +1,14 @@
 ﻿@model InventorySystem.DataBase.Category_t
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Crear Nuevo</h2>
+<h2>Edicion</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -15,6 +16,8 @@
         <h4>Categoria</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.category_id)
+
         <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,14 +36,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("VOlver al Listado", "Index")
+    @Html.ActionLink("Volver al Listado", "Index")
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
