@@ -132,22 +132,22 @@
     <Content Include="css\style.min.css" />
     <Content Include="css\styleLogin.css" />
     <Content Include="Global.asax" />
-    <Content Include="img\lightbox\default-skin.png" />
-    <Content Include="img\lightbox\default-skin.svg" />
-    <Content Include="img\lightbox\preloader.gif" />
-    <Content Include="img\logo.jpg" />
-    <Content Include="img\overlays\01.png" />
-    <Content Include="img\overlays\02.png" />
-    <Content Include="img\overlays\03.png" />
-    <Content Include="img\overlays\04.png" />
-    <Content Include="img\overlays\05.png" />
-    <Content Include="img\overlays\06.png" />
-    <Content Include="img\overlays\07.png" />
-    <Content Include="img\overlays\08.png" />
-    <Content Include="img\overlays\09.png" />
-    <Content Include="img\sample.jpg" />
-    <Content Include="img\svg\arrow_left.svg" />
-    <Content Include="img\svg\arrow_right.svg" />
+    <Content Include="css\img\lightbox\default-skin.png" />
+    <Content Include="css\img\lightbox\default-skin.svg" />
+    <Content Include="css\img\lightbox\preloader.gif" />
+    <Content Include="css\img\logo.jpg" />
+    <Content Include="css\img\overlays\01.png" />
+    <Content Include="css\img\overlays\02.png" />
+    <Content Include="css\img\overlays\03.png" />
+    <Content Include="css\img\overlays\04.png" />
+    <Content Include="css\img\overlays\05.png" />
+    <Content Include="css\img\overlays\06.png" />
+    <Content Include="css\img\overlays\07.png" />
+    <Content Include="css\img\overlays\08.png" />
+    <Content Include="css\img\overlays\09.png" />
+    <Content Include="css\img\sample.jpg" />
+    <Content Include="css\img\svg\arrow_left.svg" />
+    <Content Include="css\img\svg\arrow_right.svg" />
     <Content Include="js\addons\datatables.js" />
     <Content Include="js\addons\datatables.min.js" />
     <Content Include="js\bootstrap.js" />
@@ -156,12 +156,22 @@
     <Content Include="js\mdb.js" />
     <Content Include="js\mdb.min.js" />
     <Content Include="js\popper.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\Category_tController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Product_tController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -234,6 +244,18 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Category_t\Create.cshtml" />
+    <Content Include="Views\Category_t\Delete.cshtml" />
+    <Content Include="Views\Category_t\Details.cshtml" />
+    <Content Include="Views\Category_t\Edit.cshtml" />
+    <Content Include="Views\Category_t\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Product_t\Create.cshtml" />
+    <Content Include="Views\Product_t\Delete.cshtml" />
+    <Content Include="Views\Product_t\Details.cshtml" />
+    <Content Include="Views\Product_t\Edit.cshtml" />
+    <Content Include="Views\Product_t\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
@@ -262,6 +284,9 @@
       <Project>{09fd0a70-67d7-4e0a-b0da-ad4455a8c966}</Project>
       <Name>InventorySystemRepository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
