@@ -1,9 +1,38 @@
-﻿
+﻿@model IEnumerable<InventorySystem.DataBase.inventario_v>
+
 @{
-    ViewBag.Title = "Index";
-    Page.Title = "Index";
-    Layout = "~/Shared/Layouts/_Layout.cshtml";
+    ViewBag.Title = "Inventario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<img src="https://es.smartsheet.com/sites/default/files/7-Food-Inventory-Template-ES.png" />
 
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Almacen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @item.Producto
+        </td>
+        <td>
+            @item.Almacen
+        </td>
+        <td>
+            @item.Categoria
+        </td>
+    </tr>
+    }
+
+</table>

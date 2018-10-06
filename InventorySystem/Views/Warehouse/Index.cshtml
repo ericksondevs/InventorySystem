@@ -1,0 +1,65 @@
+﻿@model IEnumerable<InventorySystem.DataBase.Warehouse_t>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_update_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.creation_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_user_update)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_update_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.creation_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_user_update)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.warehouse_id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.warehouse_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.warehouse_id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
