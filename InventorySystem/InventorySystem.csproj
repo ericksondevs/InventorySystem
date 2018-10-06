@@ -195,7 +195,7 @@
     <Content Include="scss\style.scss" />
     <Content Include="scss\_custom-styles.scss" />
     <Content Include="scss\_custom-variables.scss" />
-    <Content Include="Shared\Layouts\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
