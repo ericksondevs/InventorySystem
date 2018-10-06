@@ -1,0 +1,39 @@
+﻿@model IEnumerable<InventorySystem.DataBase.Category_t>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Litado de Categorias</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.category_id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.category_id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.category_id })
+        </td>
+    </tr>
+}
+
+</table>

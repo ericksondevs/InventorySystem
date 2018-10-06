@@ -1,0 +1,80 @@
+﻿@model InventorySystem.DataBase.Product_t
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que desea eliminar esto?</h3>
+<div>
+    <h4>Product_t</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.existence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.existence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category_t.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category_t.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit_t.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit_t.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Warehouse_t.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse_t.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al Listado", "Index")
+        </div>
+    }
+</div>

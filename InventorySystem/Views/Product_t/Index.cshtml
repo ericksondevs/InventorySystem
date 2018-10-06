@@ -1,0 +1,69 @@
+﻿@model IEnumerable<InventorySystem.DataBase.Product_t>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Productos</h2>
+
+<p>
+    @Html.ActionLink("Crear unp", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.existence)
+        </th
+        <th>
+            @Html.DisplayNameFor(model => model.Category_t.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit_t.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouse_t.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.existence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category_t.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit_t.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Warehouse_t.name)
+        </td>
+        <td>
+            @Html.ActionLink("Edita", "Edit", new { id=item.product_id }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.product_id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.product_id })
+        </td>
+    </tr>
+}
+
+</table>
