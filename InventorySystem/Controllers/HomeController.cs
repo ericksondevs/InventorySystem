@@ -12,11 +12,15 @@ namespace InventorySystem.Controllers
         private InventorySystemEntities db = new InventorySystemEntities();
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string SearchText)
         {
-         
+            if (!string.IsNullOrEmpty(SearchText))
+            {
+                var result = db.inventario_v.ToList().Where(s => s.Producto.Contains(SearchText));
+
+                return View(result.ToList());
+            }
             return View(db.inventario_v.ToList());
-       
         }
     }
 }

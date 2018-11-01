@@ -5,10 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>User_t</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,36 +16,12 @@
             @Html.DisplayFor(model => model.email)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.password)
-        </dt>
+        </dt>*@
 
         <dd>
             @Html.DisplayFor(model => model.password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.last_update_date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.last_update_date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.creation_Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.creation_Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.last_user_update)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.last_user_update)
         </dd>
 
         <dt>

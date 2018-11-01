@@ -18,7 +18,7 @@ namespace InventorySystem.DataBase
         public string first_name { get; set; }
         public string last_name_1 { get; set; }
         public string last_name_2 { get; set; }
-        public int identification { get; set; }
+        public string identification { get; set; }
         public string address { get; set; }
         public Nullable<System.DateTime> hiring_date { get; set; }
         public Nullable<int> user_id { get; set; }

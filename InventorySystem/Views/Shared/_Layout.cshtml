@@ -1,15 +1,13 @@
 ﻿
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@Page.Title</title>
-
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Login</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -18,23 +16,20 @@
     <link href="~/css/mdb.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
     <link href="~/css/style.min.css" rel="stylesheet" />
-
+    <link href="~/css/styleLogin.css" rel="stylesheet" />
     <style>
         .card.Navigation {
             min-width: 100% !important;
         }
     </style>
 </head>
-
 <body class="grey lighten-3">
-
-    <!--Main Navigation-->
     <header>
         <!-- Navbar -->
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <nav class="navbar fixed-top  navbar-expand-lg navbar-light white scrolling-navbar">
             <div class="container-fluid">
                 <!-- Brand -->
-                <a class="navbar-brand waves-effect" href="" target="_blank">
+                <a class="navbar-brand waves-effect" href="@Url.Action("Index", "Home")">
                     <strong class="blue-text">Unidadex</strong>
                 </a>
                 <!-- Collapse -->
@@ -43,7 +38,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Links -->
-                <div class="collapse navbar-collapse"  data-navigation="true" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse collapse" data-navigation="true" id="navbarSupportedContent">
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -52,17 +47,15 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-
-                        <li class="nav-item dropdown ">
-                            <a class="nav-item  nav-link waves-effect dropdown-toggle" data-toggle="dropdown">Seguridad<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                        <li class="nav-item dropdown  ">
+                            <a class="nav-item nav-link waves-effect dropdown-toggle" data-toggle="dropdown">Seguridad<span class="caret "></span></a>
+                            <ul class="dropdown-menu navbar-nav mr-auto">
                                 <li><a href="@Url.Action("Index", "User")">Usuarios</a></li>
                                 <li><a href="@Url.Action("Index", "Role")">Roles</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="" target="_blank">Ayuda</a>
+                            <a class="nav-link waves-effect" href="">Ayuda</a>
                         </li>
                     </ul>
                     <!-- Right -->
@@ -109,15 +102,15 @@ id = "loginLink"
             <a class="logo-wrapper waves-effect">
                 <img src="~/img/logo.jpg" class="img-fluid" alt="">
             </a>
-            <div class="list-group list-group-flush">
-                <a href="@Url.Action("Index", "Home")" class="list-group-item active waves-effect">
-                    <i class="fa fa-money mr-3"></i>Inventario
+            <div class="nav list-group list-group-flush">
+                <a href="@Url.Action("Index", "Home")" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-database mr-3"></i>Inventario
                 </a>
                 <a href="@Url.Action("Index", "Warehouse")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-pie-chart mr-3"></i>Almacenes
+                    <i class="fa fa-shopping-bag mr-3"></i>Almacenes
                 </a>
                 <a href="@Url.Action("Index", "Unit")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fas fa-boxes mr-3"></i>Unidades
+                    <i class="fa fa-table mr-3"></i>Unidades
                 </a>
                 <a href="@Url.Action("Index", "Category")" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-bars mr-3"></i>Categoria
@@ -129,16 +122,15 @@ id = "loginLink"
                     <i class="fa fa-user mr-3"></i>Empleados
                 </a>
                 @*<a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fa fa-money mr-3"></i>Ventas
-        </a>*@
-
+                        <i class="fa fa-money mr-3"></i>Ventas
+                    </a>*@
             </div>
         </div>
         <!-- Sidebar -->
     </header>
     <!--Main Navigation-->
     <!--Main layout-->
-    <main class="pt-5 mx-lg-5">
+    <main class="pt-5 mx-lg-5" style="position:relative">
         <div class="container-fluid mt-5">
             <!-- Heading -->
             <div class="row wow fadeIn">
@@ -146,15 +138,17 @@ id = "loginLink"
                     <!--Card content-->
                     <div class="card-body d-sm-flex justify-content-between">
                         <h4 class="mb-2 mb-sm-0 pt-1">
-                            <span>@Html.ActionLink("Inicio", "Index", "Home", routeValues: null, htmlAttributes: new { target = "_blank" })/</span>
+                            <span>@Html.ActionLink("Inicio", "Index", "Home")/</span>
                             <span>@ViewBag.Title</span>
                         </h4>
                         <form class="d-flex justify-content-center">
                             <!-- Default input -->
-                            <input type="search" placeholder="Búsqueda" aria-label="Search" class="form-control">
-                            <button class="btn btn-primary btn-sm my-0 p" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.TextBox("SearchText", null, new { @class = "form-control", @style = "min-width:200px", @placeholder = "Búsqueda" })
+                                <button class="btn btn-primary btn-sm my-0 p" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>}
                         </form>
                     </div>
                 </div>
@@ -172,7 +166,6 @@ id = "loginLink"
     <footer class="page-footer  text-center  font-small primary-color-dark darken-2 mt-4 wow fadeIn">
         <!--Call to action-->
         <div class="pt-4">
-
         </div>
         <!--/.Call to action-->
         <hr class="my-4">
@@ -183,7 +176,7 @@ id = "loginLink"
         <!--Copyright-->
         <div class="footer-copyright py-3">
             © 2018 Copyright:
-            <a href="" target="_blank"> System </a>
+            <a href="">Inventory System</a>
         </div>
         <!--/.Copyright-->
     </footer>
@@ -201,7 +194,31 @@ id = "loginLink"
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
-    </script>
 
+        $(function () {
+            setNavigation();
+        });
+
+        function setNavigation() {
+            var path = window.location.pathname;
+            path = path.replace(/\/$/, "");
+            path = decodeURIComponent(path);
+
+            $(".nav a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).addClass('active');
+                }
+            });
+
+            $(".dropdown-menu a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('active');
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>

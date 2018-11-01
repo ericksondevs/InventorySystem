@@ -49,55 +49,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="Category_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomDataAnotations\IdentificationValidationAttribute.cs" />
     <Compile Include="Employee_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="inventario_v.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="InventorySystemDataModel.Context.cs">
+    <Compile Include="InventorySystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InventorySystemDataModel.Context.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="InventorySystemDataModel.cs">
+    <Compile Include="InventorySystemModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="InventorySystemDataModel.Designer.cs">
+    <Compile Include="InventorySystemModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InventorySystemDataModel.edmx</DependentUpon>
+      <DependentUpon>InventorySystemModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MetaDataEntities\EmployeeMetaData.cs" />
+    <Compile Include="MetaDataEntities\PartialMetaDataClasses.cs" />
+    <Compile Include="MetaDataEntities\RoleMetaData.cs" />
+    <Compile Include="MetaDataEntities\UserMetaData.cs" />
     <Compile Include="Product_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Unit_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Warehouse_t.cs">
-      <DependentUpon>InventorySystemDataModel.tt</DependentUpon>
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="InventorySystemDataModel.edmx">
+    <EntityDeploy Include="InventorySystemModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InventorySystemDataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>InventorySystemModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="InventorySystemDataModel.edmx.diagram">
-      <DependentUpon>InventorySystemDataModel.edmx</DependentUpon>
+    <None Include="InventorySystemModel.edmx.diagram">
+      <DependentUpon>InventorySystemModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -105,15 +111,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="InventorySystemDataModel.Context.tt">
+    <Content Include="InventorySystemDataModel.edmx.sql" />
+    <Content Include="InventorySystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventorySystemDataModel.edmx</DependentUpon>
-      <LastGenOutput>InventorySystemDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>InventorySystemModel.edmx</DependentUpon>
+      <LastGenOutput>InventorySystemModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="InventorySystemDataModel.tt">
+    <Content Include="InventorySystemModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventorySystemDataModel.edmx</DependentUpon>
-      <LastGenOutput>InventorySystemDataModel.cs</LastGenOutput>
+      <DependentUpon>InventorySystemModel.edmx</DependentUpon>
+      <LastGenOutput>InventorySystemModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

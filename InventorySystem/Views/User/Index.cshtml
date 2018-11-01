@@ -1,12 +1,8 @@
 ﻿@model IEnumerable<InventorySystem.DataBase.User_t>
-
 @{
     ViewBag.Title = "Usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Crear nuevo usuario", "Create")
 </p>
@@ -32,33 +28,32 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_update_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.creation_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_user_update)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role_t.description)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.user_id }) |
-            @Html.ActionLink("Detalle", "Details", new { id=item.user_id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.user_id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_update_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.creation_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_user_update)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role_t.description)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.user_id }) |
+                @Html.ActionLink("Detalle", "Details", new { id = item.user_id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.user_id })
+            </td>
+        </tr>
+    }
 </table>

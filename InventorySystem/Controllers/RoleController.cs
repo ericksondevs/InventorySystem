@@ -7,17 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventorySystem.DataBase;
+using InventorySystemRepository;
 
 namespace InventorySystem.Controllers
 {
     public class RoleController : Controller
     {
-        private InventorySystemEntities db = new InventorySystemEntities();
-
+        UnitOfWork unit = new UnitOfWork();
         // GET: Role
         public ActionResult Index()
         {
-            return View(db.Role_t.ToList());
+            return View(unit.RoleRepository.GetAll().ToList());
         }
 
         // GET: Role/Details/5
@@ -27,7 +27,8 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role_t role_t = db.Role_t.Find(id);
+
+            Role_t role_t = unit.RoleRepository.Get(x => x.role_id == id);
             if (role_t == null)
             {
                 return HttpNotFound();
@@ -46,14 +47,12 @@ namespace InventorySystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "role_id,description,last_update_date,creation_Date,last_user_update")] Role_t role_t)
+        public ActionResult Create([Bind(Include = "role_id,description")] Role_t role_t)
         {
             if (ModelState.IsValid)
             {
-                role_t.creation_Date = DateTime.Now;
-                role_t.last_user_update = User.Identity.Name;
-                db.Role_t.Add(role_t);
-                db.SaveChanges();
+                unit.RoleRepository.Add(role_t);
+                unit.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +66,7 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role_t role_t = db.Role_t.Find(id);
+            Role_t role_t = unit.RoleRepository.Get(x => x.role_id == id);
             if (role_t == null)
             {
                 return HttpNotFound();
@@ -84,10 +83,12 @@ namespace InventorySystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                role_t.last_update_date = DateTime.Now;
-                role_t.last_user_update = User.Identity.Name;
-                db.Entry(role_t).State = EntityState.Modified;
-                db.SaveChanges();
+                var dbrol = unit.RoleRepository.Get(x => x.role_id == role_t.role_id);
+                dbrol.description = role_t.description;
+
+                unit.RoleRepository.Update(dbrol);
+                unit.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(role_t);
@@ -100,7 +101,8 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role_t role_t = db.Role_t.Find(id);
+
+            Role_t role_t = unit.RoleRepository.Get(x => x.role_id == id);
             if (role_t == null)
             {
                 return HttpNotFound();
@@ -113,9 +115,10 @@ namespace InventorySystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Role_t role_t = db.Role_t.Find(id);
-            db.Role_t.Remove(role_t);
-            db.SaveChanges();
+            Role_t role_t = unit.RoleRepository.Get(x => x.role_id == id);
+            unit.RoleRepository.Remove(role_t);
+            unit.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -123,7 +126,7 @@ namespace InventorySystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unit.Dispose();
             }
             base.Dispose(disposing);
         }

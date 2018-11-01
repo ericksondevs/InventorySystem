@@ -15,8 +15,14 @@ namespace InventorySystem.Controllers
         private InventorySystemEntities db = new InventorySystemEntities();
 
         // GET: Category_t
-        public ActionResult Index()
+        public ActionResult Index(string SearchText)
         {
+            if (!string.IsNullOrEmpty(SearchText))
+            {
+                var result = db.Category_t.ToList().Where(s => s.name.Contains(SearchText));
+
+                return View(result.ToList());
+            }
             return View(db.Category_t.ToList());
         }
 

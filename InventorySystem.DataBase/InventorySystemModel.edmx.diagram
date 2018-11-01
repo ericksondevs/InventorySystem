@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bdb39a9b842243dca181b9fe28f126cb" Name="Diagram1">
+        <EntityTypeShape EntityType="InventorySystemModel.Category_t" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.Employee_t" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.inventario_v" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.Product_t" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.Role_t" Width="1.5" PointX="1.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.Unit_t" Width="1.5" PointX="3.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.User_t" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventorySystemModel.Warehouse_t" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="InventorySystemModel.FK_pk_product_caterogy" ManuallyRouted="false" />
+        <AssociationConnector Association="InventorySystemModel.FK_pk_employee_user" ManuallyRouted="false" />
+        <AssociationConnector Association="InventorySystemModel.FK_pk_employee_warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="InventorySystemModel.FK_pk_product_unit" ManuallyRouted="false" />
+        <AssociationConnector Association="InventorySystemModel.FK_pk_product_warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="InventorySystemModel.FK_pk_user_role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

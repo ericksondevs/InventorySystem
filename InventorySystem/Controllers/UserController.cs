@@ -7,18 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventorySystem.DataBase;
+using InventorySystemRepository;
 
 namespace InventorySystem.Controllers
 {
     public class UserController : Controller
     {
-        private InventorySystemEntities db = new InventorySystemEntities();
-
+        UnitOfWork unit = new UnitOfWork();
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string SearchText)
         {
-            var user_t = db.User_t.Include(u => u.Role_t);
-            return View(user_t.ToList());
+            if (!string.IsNullOrEmpty(SearchText))
+            {
+                var result = unit.dbContext.User_t.Include(u => u.Role_t).ToList().Where(s => s.email.Contains(SearchText));
+
+                return View(result.ToList());
+            }
+            return View(unit.dbContext.User_t.Include(u => u.Role_t).ToList());
         }
 
         // GET: User/Details/5
@@ -28,7 +33,7 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User_t user_t = db.User_t.Find(id);
+            User_t user_t = unit.UserRepository.Get(x => x.user_id == id);
             if (user_t == null)
             {
                 return HttpNotFound();
@@ -39,7 +44,7 @@ namespace InventorySystem.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description");
+            ViewBag.role_id = new SelectList(unit.dbContext.Role_t, "role_id", "description");
             return View();
         }
 
@@ -47,19 +52,18 @@ namespace InventorySystem.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "user_id,email,password,role_id,last_update_date,creation_Date,last_user_update")] User_t user_t)
+        public ActionResult Create([Bind(Include = "user_id,email,password,role_id")] User_t user_t)
         {
             if (ModelState.IsValid)
             {
-                user_t.creation_Date = DateTime.Now;
-                user_t.last_user_update = User.Identity.Name;
-                db.User_t.Add(user_t);
-                db.SaveChanges();
+                unit.UserRepository.Add(user_t);
+                unit.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description", user_t.role_id);
+            ViewBag.role_id = new SelectList(unit.dbContext.Role_t, "role_id", "description", user_t.role_id);
             return View(user_t);
         }
 
@@ -70,12 +74,12 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User_t user_t = db.User_t.Find(id);
+            User_t user_t = unit.UserRepository.Get(x => x.user_id == id);
             if (user_t == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description", user_t.role_id);
+            ViewBag.role_id = new SelectList(unit.dbContext.Role_t, "role_id", "description", user_t.role_id);
             return View(user_t);
         }
 
@@ -88,13 +92,15 @@ namespace InventorySystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                user_t.last_update_date = DateTime.Now;
-                user_t.last_user_update = User.Identity.Name;
-                db.Entry(user_t).State = EntityState.Modified;
-                db.SaveChanges();
+                User_t dbuser = unit.UserRepository.Get(x=>x.user_id == user_t.user_id);
+                dbuser.email = user_t.email;
+                dbuser.password = user_t.password;
+
+                unit.UserRepository.Update(dbuser);
+                unit.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.role_id = new SelectList(db.Role_t, "role_id", "description", user_t.role_id);
+            ViewBag.role_id = new SelectList(unit.dbContext.Role_t, "role_id", "description", user_t.role_id);
             return View(user_t);
         }
 
@@ -105,7 +111,7 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User_t user_t = db.User_t.Find(id);
+            User_t user_t = unit.UserRepository.Get(x => x.user_id == id);
             if (user_t == null)
             {
                 return HttpNotFound();
@@ -118,9 +124,9 @@ namespace InventorySystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User_t user_t = db.User_t.Find(id);
-            db.User_t.Remove(user_t);
-            db.SaveChanges();
+            User_t user_t = unit.UserRepository.Get(x => x.user_id == id);
+            unit.UserRepository.Remove(user_t);
+            unit.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -128,7 +134,7 @@ namespace InventorySystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unit.Dispose();
             }
             base.Dispose(disposing);
         }

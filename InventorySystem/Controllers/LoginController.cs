@@ -25,25 +25,25 @@ namespace InventorySystem.Controllers
             {
                 return this.RedirectToLocal("");
             }
-                return View();
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(User_t u)
         {
+            ModelState.Remove("role_id");
             if (ModelState.IsValid)
             {
-                if (await unit.LoginRepository.Login(u.email, u.password))
+                if (await unit.UserRepository.Login(u.email, u.password))
                 {
                     bool rememberme = Request.Form["rememberme"] != null && Request.Form["rememberme"] == "on";
 
-                    this.SignInUser(u.email, rememberme);
-                    // Info.    
-                    return this.RedirectToLocal("");
+                    var user = unit.UserRepository.Get(x => x.email == u.email && x.password == u.password);
 
-                    //Redireccionar dependiendo Rol
-                    return RedirectToAction("Index", "Home");
+                    this.SignInUser(user.user_id.ToString(), rememberme);
+                    //Redireccionar dependiendo Rol 
+                    return this.RedirectToLocal("");
                 }
             }
             else
@@ -52,7 +52,7 @@ namespace InventorySystem.Controllers
             }
             return View(u);
         }
- 
+
         /// <summary>  
         /// Sign In User method.    
         /// </summary>  
