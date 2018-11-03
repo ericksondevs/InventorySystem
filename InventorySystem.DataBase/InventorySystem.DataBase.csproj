@@ -77,13 +77,27 @@
     </Compile>
     <Compile Include="MetaDataEntities\EmployeeMetaData.cs" />
     <Compile Include="MetaDataEntities\PartialMetaDataClasses.cs" />
+    <Compile Include="MetaDataEntities\PersonMetaData.cs" />
     <Compile Include="MetaDataEntities\RoleMetaData.cs" />
+    <Compile Include="MetaDataEntities\SellMetaData.cs" />
     <Compile Include="MetaDataEntities\UserMetaData.cs" />
+    <Compile Include="Operation_t.cs">
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Operation_type_t.cs">
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Person_t.cs">
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product_t.cs">
       <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role_t.cs">
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sell_t.cs">
       <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Unit_t.cs">
@@ -111,12 +125,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="InventorySystemDataModel.edmx.sql" />
     <Content Include="InventorySystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>InventorySystemModel.edmx</DependentUpon>
       <LastGenOutput>InventorySystemModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="InventorySystemModel.edmx.sql" />
     <Content Include="InventorySystemModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>InventorySystemModel.edmx</DependentUpon>

@@ -47,6 +47,8 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
+                  
+
                         <li class="nav-item dropdown  ">
                             <a class="nav-item nav-link waves-effect dropdown-toggle" data-toggle="dropdown">Seguridad<span class="caret "></span></a>
                             <ul class="dropdown-menu navbar-nav mr-auto">
@@ -121,9 +123,13 @@ id = "loginLink"
                 <a href="@Url.Action("Index", "Employee")" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-user mr-3"></i>Empleados
                 </a>
-                @*<a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-money mr-3"></i>Ventas
-                    </a>*@
+                <a href="@Url.Action("Index", "Sell")" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-money mr-3"></i>Operaciones
+                </a>
+
+                <a href="@Url.Action("Index", "Person")" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-users mr-3"></i>Clientes/Proveedores
+                </a>
             </div>
         </div>
         <!-- Sidebar -->

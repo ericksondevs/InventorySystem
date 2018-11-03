@@ -1,0 +1,67 @@
+﻿@model InventorySystem.DataBase.Sell_t
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sell_t</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Person_t.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Person_t.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operation_type_t.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operation_type_t.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_t.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_t.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

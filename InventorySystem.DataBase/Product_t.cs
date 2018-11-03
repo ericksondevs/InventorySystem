@@ -14,6 +14,12 @@ namespace InventorySystem.DataBase
     
     public partial class Product_t
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product_t()
+        {
+            this.Operations = new HashSet<Operation_t>();
+        }
+    
         public int product_id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
@@ -29,5 +35,7 @@ namespace InventorySystem.DataBase
         public virtual Category_t Category_t { get; set; }
         public virtual Unit_t Unit_t { get; set; }
         public virtual Warehouse_t Warehouse_t { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Operation_t> Operations { get; set; }
     }
 }

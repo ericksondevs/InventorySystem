@@ -16,11 +16,12 @@ namespace InventorySystem.Controllers
         {
             if (!string.IsNullOrEmpty(SearchText))
             {
-                var result = db.inventario_v.ToList().Where(s => s.Producto.Contains(SearchText));
+                //  var result = db.inventario_v.ToList().Where(s => s.Producto.Contains(SearchText));
+                var result = db.Product_t.ToList().Where(s => s.name.Contains(SearchText));
 
                 return View(result.ToList());
             }
-            return View(db.inventario_v.ToList());
+            return View(db.Product_t.ToList());
         }
     }
 }

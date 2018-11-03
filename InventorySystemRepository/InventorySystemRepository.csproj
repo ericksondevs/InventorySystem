@@ -51,7 +51,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseRepository.cs" />
     <Compile Include="IBaseRepository.cs" />
-    <Compile Include="Security\LoginRepository.cs" />
+    <Compile Include="Repositories\Operations\SellRepository.cs" />
+    <Compile Include="Repositories\Security\LoginRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
