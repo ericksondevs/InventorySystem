@@ -16,5 +16,12 @@ namespace InventorySystem.DataBase
 
     [MetadataType(typeof(EmployeeMetaData))]
     public partial class Employee_t : BaseMetaDataEntity { }
+
+    [MetadataType(typeof(SellMetaData))]
+    public partial class Sell_t : BaseMetaDataEntity { }
+
+    [MetadataType(typeof(PersonMetaData))]
+    public partial class Person_t : BaseMetaDataEntity { }
+
 }
 

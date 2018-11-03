@@ -1,38 +1,62 @@
-﻿@model IEnumerable<InventorySystem.DataBase.inventario_v>
-
+﻿@model IEnumerable<InventorySystem.DataBase.Product_t>
 @{
     ViewBag.Title = "Inventario";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Producto)
+            @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Almacen)
+            @Html.DisplayNameFor(model => model.Warehouse_t.name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria)
+            @Html.DisplayNameFor(model => model.Category_t.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.existence)
         </th>
     </tr>
-
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @item.Producto
-        </td>
-        <td>
-            @item.Almacen
-        </td>
-        <td>
-            @item.Categoria
-        </td>
-    </tr>
-    }
+        if (item.existence == 0)
+        {
+            @:
+            <tr style="color:red">
+                <td>
+                    @item.name
+                </td>
+                <td>
+                    @item.Warehouse_t.name
+                </td>
+                <td>
+                    @item.Category_t.name
+                </td>
 
+                <td>
+                    @item.existence
+                </td>
+            </tr>
+        }
+        else
+        { @:
+            <tr>
+                <td>
+                    @item.name
+                </td>
+                <td>
+                    @item.Warehouse_t.name
+                </td>
+                <td>
+                    @item.Category_t.name
+                </td>
+
+                <td>
+                    @item.existence
+                </td>
+            </tr>
+        }
+    }
 </table>

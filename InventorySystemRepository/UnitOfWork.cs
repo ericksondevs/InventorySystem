@@ -1,4 +1,5 @@
 ﻿using InventorySystem.DataBase;
+using InventorySystemRepository.Repositories.Operations;
 using InventorySystemRepository.Security;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,21 @@ namespace InventorySystemRepository
                     this.userRepository = new LoginRepository(dbContext);
                 }
                 return userRepository;
+            }
+        }
+
+
+        private SellRepository sellRepository;
+
+        public SellRepository SellRepository
+        {
+            get
+            {
+                if (this.sellRepository == null)
+                {
+                    this.sellRepository = new SellRepository(dbContext);
+                }
+                return sellRepository;
             }
         }
 

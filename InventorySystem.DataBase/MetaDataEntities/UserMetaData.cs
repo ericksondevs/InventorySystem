@@ -19,5 +19,6 @@ namespace InventorySystem.DataBase.MetaDataEntities
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [DisplayName("Rol")]
         public Nullable<int> role_id { get; set; }
+
     }
 }

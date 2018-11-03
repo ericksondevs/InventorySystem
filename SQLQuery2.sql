@@ -1,9 +1,9 @@
-
+﻿
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2018 11:11:37
--- Generated from EDMX file: C:\Users\erickson_pena\Desktop\InventorySystem-master\InventorySystem.DataBase\InventorySystemDataModel.edmx
+-- Date Created: 11/02/2018 10:18:53
+-- Generated from EDMX file: C:\Users\erickson_pena\Desktop\InventorySystem-master\InventorySystem.DataBase\InventorySystemModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,14 +17,14 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_pk_product_caterogy]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Product_t] DROP CONSTRAINT [FK_pk_product_caterogy];
+GO
 IF OBJECT_ID(N'[dbo].[FK_pk_employee_user]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Employee_t] DROP CONSTRAINT [FK_pk_employee_user];
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_employee_warehouse]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Employee_t] DROP CONSTRAINT [FK_pk_employee_warehouse];
-GO
-IF OBJECT_ID(N'[dbo].[FK_pk_product_caterogy]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Product_t] DROP CONSTRAINT [FK_pk_product_caterogy];
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_product_unit]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Product_t] DROP CONSTRAINT [FK_pk_product_unit];
@@ -34,6 +34,30 @@ IF OBJECT_ID(N'[dbo].[FK_pk_product_warehouse]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_user_role]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[User_t] DROP CONSTRAINT [FK_pk_user_role];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SellPerson_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sells] DROP CONSTRAINT [FK_SellPerson_t];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SellUser_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sells] DROP CONSTRAINT [FK_SellUser_t];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SellOperation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operations] DROP CONSTRAINT [FK_SellOperation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OperationProduct_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operations] DROP CONSTRAINT [FK_OperationProduct_t];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OperationOperation_type_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operations] DROP CONSTRAINT [FK_OperationOperation_type_t];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SellPerson_t1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sells] DROP CONSTRAINT [FK_SellPerson_t1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SellOperation_type_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sells] DROP CONSTRAINT [FK_SellOperation_type_t];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SellUser_t1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sells] DROP CONSTRAINT [FK_SellUser_t1];
 GO
 
 -- --------------------------------------------------
@@ -45,6 +69,9 @@ IF OBJECT_ID(N'[dbo].[Category_t]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Employee_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Employee_t];
+GO
+IF OBJECT_ID(N'[dbo].[inventario_v]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[inventario_v];
 GO
 IF OBJECT_ID(N'[dbo].[Product_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Product_t];
@@ -61,8 +88,17 @@ GO
 IF OBJECT_ID(N'[dbo].[Warehouse_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Warehouse_t];
 GO
-IF OBJECT_ID(N'[InventorySystemModelStoreContainer].[inventario_v]', 'U') IS NOT NULL
-    DROP TABLE [InventorySystemModelStoreContainer].[inventario_v];
+IF OBJECT_ID(N'[dbo].[Operation_type_t]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Operation_type_t];
+GO
+IF OBJECT_ID(N'[dbo].[Person_t]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Person_t];
+GO
+IF OBJECT_ID(N'[dbo].[Sells]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sells];
+GO
+IF OBJECT_ID(N'[dbo].[Operations]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Operations];
 GO
 
 -- --------------------------------------------------
@@ -86,7 +122,7 @@ CREATE TABLE [dbo].[Employee_t] (
     [first_name] varchar(100)  NOT NULL,
     [last_name_1] varchar(100)  NOT NULL,
     [last_name_2] varchar(100)  NULL,
-    [identification] int  NOT NULL,
+    [identification] varchar(11)  NULL,
     [address] varchar(200)  NULL,
     [hiring_date] datetime  NULL,
     [user_id] int  NULL,
@@ -94,6 +130,14 @@ CREATE TABLE [dbo].[Employee_t] (
     [last_update_date] datetime  NULL,
     [creation_Date] datetime  NULL,
     [last_user_update] varchar(100)  NULL
+);
+GO
+
+-- Creating table 'inventario_v'
+CREATE TABLE [dbo].[inventario_v] (
+    [Producto] varchar(100)  NOT NULL,
+    [Almacen] varchar(200)  NOT NULL,
+    [Categoria] varchar(100)  NOT NULL
 );
 GO
 
@@ -156,11 +200,53 @@ CREATE TABLE [dbo].[Warehouse_t] (
 );
 GO
 
--- Creating table 'inventario_v'
-CREATE TABLE [dbo].[inventario_v] (
-    [Producto] varchar(100)  NOT NULL,
-    [Almacen] varchar(200)  NOT NULL,
-    [Categoria] varchar(100)  NOT NULL
+-- Creating table 'Operation_type_t'
+CREATE TABLE [dbo].[Operation_type_t] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [IdOperacion] int  NOT NULL,
+    [Description] varchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'Person_t'
+CREATE TABLE [dbo].[Person_t] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [name] varchar(100)  NOT NULL,
+    [lastName] varchar(100)  NOT NULL,
+    [company] nchar(10)  NULL,
+    [address1] nchar(10)  NULL,
+    [address2] nchar(10)  NULL,
+    [phone] nchar(10)  NULL,
+    [email] nchar(10)  NULL,
+    [last_update_date] datetime  NOT NULL,
+    [creation_date] datetime  NOT NULL,
+    [last_user_update] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'Sell_t'
+CREATE TABLE [dbo].[Sell_t] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [total] float  NOT NULL,
+    [cash] float  NOT NULL,
+    [discount] nvarchar(max)  NOT NULL,
+    [Person_Id] int  NOT NULL,
+    [Operation_type_Id] int  NOT NULL,
+    [user_id] int  NULL,
+    [SellPerson_t_Sell_Id] int  NOT NULL,
+    [SellUser_t_Sell_user_id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Operation_t'
+CREATE TABLE [dbo].[Operation_t] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Sell_Id] int  NOT NULL,
+    [product_id] int  NOT NULL,
+    [Operation_type_Id] int  NOT NULL,
+    [last_update_date] datetime  NOT NULL,
+    [creation_Date] datetime  NOT NULL,
+    [last_user_update] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -178,6 +264,12 @@ GO
 ALTER TABLE [dbo].[Employee_t]
 ADD CONSTRAINT [PK_Employee_t]
     PRIMARY KEY CLUSTERED ([employee_id] ASC);
+GO
+
+-- Creating primary key on [Producto], [Almacen], [Categoria] in table 'inventario_v'
+ALTER TABLE [dbo].[inventario_v]
+ADD CONSTRAINT [PK_inventario_v]
+    PRIMARY KEY CLUSTERED ([Producto], [Almacen], [Categoria] ASC);
 GO
 
 -- Creating primary key on [product_id] in table 'Product_t'
@@ -210,10 +302,28 @@ ADD CONSTRAINT [PK_Warehouse_t]
     PRIMARY KEY CLUSTERED ([warehouse_id] ASC);
 GO
 
--- Creating primary key on [Producto], [Almacen], [Categoria] in table 'inventario_v'
-ALTER TABLE [dbo].[inventario_v]
-ADD CONSTRAINT [PK_inventario_v]
-    PRIMARY KEY CLUSTERED ([Producto], [Almacen], [Categoria] ASC);
+-- Creating primary key on [Id] in table 'Operation_type_t'
+ALTER TABLE [dbo].[Operation_type_t]
+ADD CONSTRAINT [PK_Operation_type_t]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Person_t'
+ALTER TABLE [dbo].[Person_t]
+ADD CONSTRAINT [PK_Person_t]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Sell_t'
+ALTER TABLE [dbo].[Sell_t]
+ADD CONSTRAINT [PK_Sell_t]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Operation_t'
+ALTER TABLE [dbo].[Operation_t]
+ADD CONSTRAINT [PK_Operation_t]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -308,6 +418,126 @@ GO
 CREATE INDEX [IX_FK_pk_user_role]
 ON [dbo].[User_t]
     ([role_id]);
+GO
+
+-- Creating foreign key on [SellPerson_t_Sell_Id] in table 'Sell_t'
+ALTER TABLE [dbo].[Sell_t]
+ADD CONSTRAINT [FK_SellPerson_t]
+    FOREIGN KEY ([SellPerson_t_Sell_Id])
+    REFERENCES [dbo].[Person_t]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SellPerson_t'
+CREATE INDEX [IX_FK_SellPerson_t]
+ON [dbo].[Sell_t]
+    ([SellPerson_t_Sell_Id]);
+GO
+
+-- Creating foreign key on [SellUser_t_Sell_user_id] in table 'Sell_t'
+ALTER TABLE [dbo].[Sell_t]
+ADD CONSTRAINT [FK_SellUser_t]
+    FOREIGN KEY ([SellUser_t_Sell_user_id])
+    REFERENCES [dbo].[User_t]
+        ([user_id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SellUser_t'
+CREATE INDEX [IX_FK_SellUser_t]
+ON [dbo].[Sell_t]
+    ([SellUser_t_Sell_user_id]);
+GO
+
+-- Creating foreign key on [Sell_Id] in table 'Operation_t'
+ALTER TABLE [dbo].[Operation_t]
+ADD CONSTRAINT [FK_SellOperation]
+    FOREIGN KEY ([Sell_Id])
+    REFERENCES [dbo].[Sell_t]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SellOperation'
+CREATE INDEX [IX_FK_SellOperation]
+ON [dbo].[Operation_t]
+    ([Sell_Id]);
+GO
+
+-- Creating foreign key on [product_id] in table 'Operation_t'
+ALTER TABLE [dbo].[Operation_t]
+ADD CONSTRAINT [FK_OperationProduct_t]
+    FOREIGN KEY ([product_id])
+    REFERENCES [dbo].[Product_t]
+        ([product_id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OperationProduct_t'
+CREATE INDEX [IX_FK_OperationProduct_t]
+ON [dbo].[Operation_t]
+    ([product_id]);
+GO
+
+-- Creating foreign key on [Operation_type_Id] in table 'Operation_t'
+ALTER TABLE [dbo].[Operation_t]
+ADD CONSTRAINT [FK_OperationOperation_type_t]
+    FOREIGN KEY ([Operation_type_Id])
+    REFERENCES [dbo].[Operation_type_t]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OperationOperation_type_t'
+CREATE INDEX [IX_FK_OperationOperation_type_t]
+ON [dbo].[Operation_t]
+    ([Operation_type_Id]);
+GO
+
+-- Creating foreign key on [Person_Id] in table 'Sell_t'
+ALTER TABLE [dbo].[Sell_t]
+ADD CONSTRAINT [FK_SellPerson_t1]
+    FOREIGN KEY ([Person_Id])
+    REFERENCES [dbo].[Person_t]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SellPerson_t1'
+CREATE INDEX [IX_FK_SellPerson_t1]
+ON [dbo].[Sell_t]
+    ([Person_Id]);
+GO
+
+-- Creating foreign key on [Operation_type_Id] in table 'Sell_t'
+ALTER TABLE [dbo].[Sell_t]
+ADD CONSTRAINT [FK_SellOperation_type_t]
+    FOREIGN KEY ([Operation_type_Id])
+    REFERENCES [dbo].[Operation_type_t]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SellOperation_type_t'
+CREATE INDEX [IX_FK_SellOperation_type_t]
+ON [dbo].[Sell_t]
+    ([Operation_type_Id]);
+GO
+
+-- Creating foreign key on [user_id] in table 'Sell_t'
+ALTER TABLE [dbo].[Sell_t]
+ADD CONSTRAINT [FK_SellUser_t1]
+    FOREIGN KEY ([user_id])
+    REFERENCES [dbo].[User_t]
+        ([user_id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SellUser_t1'
+CREATE INDEX [IX_FK_SellUser_t1]
+ON [dbo].[Sell_t]
+    ([user_id]);
 GO
 
 -- --------------------------------------------------

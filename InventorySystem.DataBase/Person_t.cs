@@ -12,26 +12,26 @@ namespace InventorySystem.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class User_t
+    public partial class Person_t
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User_t()
+        public Person_t()
         {
-            this.Employee_t = new HashSet<Employee_t>();
             this.Sell_t = new HashSet<Sell_t>();
         }
     
-        public int user_id { get; set; }
+        public int Id { get; set; }
+        public string name { get; set; }
+        public string lastName { get; set; }
+        public string company { get; set; }
+        public string address1 { get; set; }
+        public string address2 { get; set; }
+        public string phone { get; set; }
         public string email { get; set; }
-        public string password { get; set; }
-        public Nullable<int> role_id { get; set; }
         public Nullable<System.DateTime> last_update_date { get; set; }
         public Nullable<System.DateTime> creation_Date { get; set; }
         public string last_user_update { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee_t> Employee_t { get; set; }
-        public virtual Role_t Role_t { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sell_t> Sell_t { get; set; }
     }
