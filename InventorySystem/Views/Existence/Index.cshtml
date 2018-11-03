@@ -1,0 +1,40 @@
+﻿@model IEnumerable<InventorySystem.DataBase.Product_t>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Consulta de Existencia</h2>
+
+<p>
+    @Html.ActionLink("Crear", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.existence)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.existence)
+        </td>
+    </tr>
+}
+
+</table>

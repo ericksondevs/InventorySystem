@@ -173,6 +173,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\ExistenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\Unit\Details.cshtml" />
     <Content Include="Views\Unit\Edit.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
+    <Content Include="Views\Existence\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
