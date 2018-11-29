@@ -1,62 +1,294 @@
-﻿@model IEnumerable<InventorySystem.DataBase.Product_t>
-@{
-    ViewBag.Title = "Inventario";
+﻿@{
+    ViewBag.Title = "Panel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-purple">
+            <span class="info-box-icon"><i class="fa fa-tags"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Inventario Neto</span>
+                <span class="info-box-number">1,777,250.00</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    Productos en stock: 20
+                </span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-money"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Ventas 2018</span>
+                <span class="info-box-number">3,610.35</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    Ventas emitidas: 1
+                </span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Compras 2018</span>
+                <span class="info-box-number">1,615,900.00</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    Compras realizadas: 1
+                </span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-users "></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Clientes</span>
+                <span class="info-box-number">1</span>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    Clientes nuevos: 1
+                </span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Warehouse_t.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category_t.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.existence)
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        if (item.existence == 0)
-        {
-            @:
-            <tr style="color:red">
-                <td>
-                    @item.name
-                </td>
-                <td>
-                    @item.Warehouse_t.name
-                </td>
-                <td>
-                    @item.Category_t.name
-                </td>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Reporte de ventas 2018</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="text-center">
+                            <strong>Compras &amp; Ventas 2018</strong>
 
-                <td>
-                    @item.existence
-                </td>
-            </tr>
-        }
-        else
-        { @:
-            <tr>
-                <td>
-                    @item.name
-                </td>
-                <td>
-                    @item.Warehouse_t.name
-                </td>
-                <td>
-                    @item.Category_t.name
-                </td>
+                        </p>
+                        <div class="chart">
+                            <canvas id="barChart" style="height: 380px; width: 816px;" width="1020" height="475"></canvas>
+                        </div>
+                    </div><!-- /.col -->
+                    <div class="col-md-4">
+                        <!-- Info Boxes Style 2 -->
+                        <!--ENDING PRODUCT LIST -->
+                        <div class="box box-primary">
+                            <div class="box-header ">
+                                <h3 class="box-title color">Productos acabandose</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="products-list product-list-in-box">
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="img/productos/product.png" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="edit_product.php?id=10" class="product-title">iPhone X 32GB <span class="label label-info pull-right">1,100.00</span></a>
+                                            <span class="product-description">
+                                                XR
+                                            </span>
+                                        </div>
+                                    </li><!-- /.item -->
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="img/productos/1543175169_1471154138_iMac-de-21.5-Retina-4K6.jpg" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="edit_product.php?id=9" class="product-title">iMac con pantalla Retina 4K de 21.5 pulgadas <span class="label label-info pull-right">2,750.00</span></a>
+                                            <span class="product-description">
+                                                06P4069
+                                            </span>
+                                        </div>
+                                    </li><!-- /.item -->
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="img/productos/1543175124_1471152907_acer.jpg" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="edit_product.php?id=8" class="product-title">Acer Aspire V5-471G Notebook <span class="label label-info pull-right">840.00</span></a>
+                                            <span class="product-description">
+                                            </span>
+                                        </div>
+                                    </li><!-- /.item -->
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="img/productos/1543175075_1471153024_asus.jpg" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="edit_product.php?id=7" class="product-title"> Asus Taichi Ultrabooks delayed <span class="label label-info pull-right">3,300.00</span></a>
+                                            <span class="product-description">
+                                            </span>
+                                        </div>
+                                    </li><!-- /.item -->
+                                    <li class="item">
+                                        <div class="product-img">
+                                            <img src="img/productos/1543175025_1471153149_dell.jpg" alt="Product Image">
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="edit_product.php?id=6" class="product-title">Teclado USB con Raton  <span class="label label-info pull-right">55.00</span></a>
+                                            <span class="product-description">
+                                                06P4069
+                                            </span>
+                                        </div>
+                                    </li><!-- /.item -->
+                                </ul>
 
-                <td>
-                    @item.existence
-                </td>
-            </tr>
-        }
-    }
-</table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer text-center">
+                                <a href="products.php" class="uppercase">Ver todos los productos</a>
+                            </div><!-- /.box-footer -->
+                        </div><!-- /.box -->
+
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- ./box-body -->
+            <div class="box-footer">
+
+            </div><!-- /.box-footer -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+
+
+ 
+    </div><!-- /.col -->
+
+
+<div class="row">
+    <!-- Left col -->
+    <div class="col-md-8">
+        <!-- TABLE: LATEST ORDERS -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Últimas ventas</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table no-margin">
+                        <thead>
+                            <tr>
+                                <th>Venta Nº</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th class="text-right">Total	</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="edit_sale.php?id=1">1</a></td>
+                                <td>IMPORTACIONES ONLINE SAC</td>
+                                <td>25-11-2018</td>
+                                <td class="text-right">3,610.35</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <a href="new_sale.php" class="btn btn-sm btn-default btn-flat pull-left">Nueva venta</a>
+                <a href="manage_invoice.php" class="btn btn-sm btn-default btn-flat pull-right">Ver todas las facturas</a>
+            </div><!-- /.box-footer -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+    <div class="col-md-4">
+
+
+        <!-- PRODUCT LIST -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Nuevos productos</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="img/productos/product.png" alt="Product Image">
+                        </div>
+                        <div class="product-info">
+                            <a href="edit_product.php?id=10" class="product-title">iPhone X 32GB <span class="label label-info pull-right">1,100.00</span></a>
+                            <span class="product-description">
+                                XR
+                            </span>
+                        </div>
+                    </li><!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="img/productos/1543175169_1471154138_iMac-de-21.5-Retina-4K6.jpg" alt="Product Image">
+                        </div>
+                        <div class="product-info">
+                            <a href="edit_product.php?id=9" class="product-title">iMac con pantalla Retina 4K de 21.5 pulgadas <span class="label label-info pull-right">2,750.00</span></a>
+                            <span class="product-description">
+                                06P4069
+                            </span>
+                        </div>
+                    </li><!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="img/productos/1543175124_1471152907_acer.jpg" alt="Product Image">
+                        </div>
+                        <div class="product-info">
+                            <a href="edit_product.php?id=8" class="product-title">Acer Aspire V5-471G Notebook <span class="label label-info pull-right">840.00</span></a>
+                            <span class="product-description">
+                            </span>
+                        </div>
+                    </li><!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="img/productos/1543175075_1471153024_asus.jpg" alt="Product Image">
+                        </div>
+                        <div class="product-info">
+                            <a href="edit_product.php?id=7" class="product-title"> Asus Taichi Ultrabooks delayed <span class="label label-info pull-right">3,300.00</span></a>
+                            <span class="product-description">
+                            </span>
+                        </div>
+                    </li><!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="img/productos/1543175025_1471153149_dell.jpg" alt="Product Image">
+                        </div>
+                        <div class="product-info">
+                            <a href="edit_product.php?id=6" class="product-title">Teclado USB con Raton  <span class="label label-info pull-right">55.00</span></a>
+                            <span class="product-description">
+                                06P4069
+                            </span>
+                        </div>
+                    </li><!-- /.item -->
+                </ul>
+
+            </div><!-- /.box-body -->
+            <div class="box-footer text-center">
+                <a href="products.php" class="uppercase">Ver todos los productos</a>
+            </div><!-- /.box-footer -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>

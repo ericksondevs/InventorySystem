@@ -1,236 +1,276 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Material Design Bootstrap -->
-    <link href="~/css/mdb.min.css" rel="stylesheet" />
-    <!-- Your custom styles (optional) -->
-    <link href="~/css/style.min.css" rel="stylesheet" />
-    <link href="~/css/styleLogin.css" rel="stylesheet" />
-    <style>
-        .card.Navigation {
-            min-width: 100% !important;
-        }
-    </style>
-</head>
-<body class="grey lighten-3">
-    <header>
-        <!-- Navbar -->
-        <nav class="navbar fixed-top  navbar-expand-lg navbar-light white scrolling-navbar">
-            <div class="container-fluid">
-                <!-- Brand -->
-                <a class="navbar-brand waves-effect" href="@Url.Action("Index", "Home")">
-                    <strong class="blue-text">Unidadex</strong>
-                </a>
-                <!-- Collapse -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- Links -->
-                <div class="collapse navbar-collapse collapse" data-navigation="true" id="navbarSupportedContent">
-                    <!-- Left -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link waves-effect" href="@Url.Action("Index", "Home")">
-                                Inicio
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                  
 
-                        <li class="nav-item dropdown  ">
-                            <a class="nav-item nav-link waves-effect dropdown-toggle" data-toggle="dropdown">Seguridad<span class="caret "></span></a>
-                            <ul class="dropdown-menu navbar-nav mr-auto">
-                                <li><a href="@Url.Action("Index", "User")">Usuarios</a></li>
-                                <li><a href="@Url.Action("Index", "Role")">Roles</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect" href="">Ayuda</a>
-                        </li>
-                    </ul>
-                    <!-- Right -->
-                    <ul class="navbar-nav nav-flex-icons">
-                        <li class="nav-item">
-                            @* @using Microsoft.AspNet.Identity*@
-                            @if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new
-                                {
-                                    id = "logoutForm",
-                                    @class = "navbar-right"
-                                }))
-                                {
-                                    @Html.AntiForgeryToken() <ul class="nav navbar-nav navbar-right">
-                                        @*<li>
-                                            @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Home", routeValues: null, htmlAttributes: new
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/AdminResources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->        
+    <link rel="stylesheet" href="~/AdminResources/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->            
+    <link rel="stylesheet" href="~/AdminResources/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- jvectormap -->          
+    <link rel="stylesheet" href="~/AdminResources/bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminResources/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="~/AdminResources/dist/css/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            <header class="main-header">
+                <!-- Logo -->
+                <a class="logo" href="@Url.Action("Index", "Home")">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>INV</b>Control</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>Inventory</b>System</span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <!-- Sidebar toggle button-->
+                    <a class="sidebar-toggle" role="button" href="#" data-toggle="offcanvas">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+
+
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                                    <img class="user-image" alt="User Image" src="~/AdminResources/dist/img/user2-160x160.jpg">
+                                    <span class="hidden-xs">Usuario</span>
+                                </a>
+                                <ul class="dropdown-menu">
+
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img class="img-circle" alt="User Image" src="~/AdminResources/dist/img/user2-160x160.jpg">
+                                        <p>
+                                            Usuario
+                                            <small>Administrador</small>
+                                        </p>
+                                    </li>
+
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+
+                                        </div>
+                                        <div class="pull-right">
+                                            @if (Request.IsAuthenticated)
                                             {
-                                                title = "Manage"
-                                            }) </li>*@
-                                        <li>
-                                            <a href="javascript:document.getElementById('logoutForm').submit()">  <i class="fa fa-user mr-2"></i> Salir</a>
-                                        </li>
-                                    </ul>}
-                            }
-                            else
-                            {<ul class="nav navbar-nav navbar-right">
-                                    <li>
-                                        @Html.ActionLink("Iniciar Sesion", "Index", "Login", routeValues: null, htmlAttributes: new
-{
-id = "loginLink"
-})
+                                                using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new
+                                                {
+                                                    id = "logoutForm",
+                                                }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <a class="btn btn-danger btn-flat" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i> Salir</a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Iniciar Sesion", "Index", "Login", routeValues: null, htmlAttributes: new
+                                           {
+                                               id = "loginLink",
+                                               @class = "btn btn-danger btn-flat" })
+                                           }
+                                        </div>
                                     </li>
                                 </ul>
-                            }
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Navbar -->
-        <!-- Sidebar -->
-        <div class="sidebar-fixed position-fixed">
-            <a class="logo-wrapper waves-effect">
-                <img src="~/img/logo.jpg" class="img-fluid" alt="">
-            </a>
-            <div class="nav list-group list-group-flush">
-                <a href="@Url.Action("Index", "Home")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-database mr-3"></i>Inventario
-                </a>
-                <a href="@Url.Action("Index", "Warehouse")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-shopping-bag mr-3"></i>Almacenes
-                </a>
-                <a href="@Url.Action("Index", "Unit")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-table mr-3"></i>Unidades
-                </a>
-                <a href="@Url.Action("Index", "Category")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-bars mr-3"></i>Categoria
-                </a>
-                <a href="@Url.Action("Index", "Product")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-table mr-3"></i>Productos
-                </a>
-                <a href="@Url.Action("Index", "Employee")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-user mr-3"></i>Empleados
-                </a>
-                <a href="@Url.Action("Index", "Existence")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-search mr-3"></i>Consulta de Existencia
-                </a>
-                @*<a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fa fa-money mr-3"></i>Ventas
-        </a>*@
-                <a href="@Url.Action("Index", "Sell")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-money mr-3"></i>Operaciones
-                </a>
+                            </li>
 
-                <a href="@Url.Action("Index", "Person")" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-users mr-3"></i>Clientes/Proveedor
-                </a>
-            </div>
-        </div>
-        <!-- Sidebar -->
-    </header>
-    <!--Main Navigation-->
-    <!--Main layout-->
-    <main class="pt-5 mx-lg-5" style="position:relative">
-        <div class="container-fluid mt-5">
-            <!-- Heading -->
-            <div class="row wow fadeIn">
-                <div class="card Navigation mb-4 wow fadeIn">
-                    <!--Card content-->
-                    <div class="card-body d-sm-flex justify-content-between">
-                        <h4 class="mb-2 mb-sm-0 pt-1">
-                            <span>@Html.ActionLink("Inicio", "Index", "Home")/</span>
-                            <span>@ViewBag.Title</span>
-                        </h4>
-                        <form class="d-flex justify-content-center">
-                            <!-- Default input -->
-                            @using (Html.BeginForm())
-                            {
-                                @Html.TextBox("SearchText", null, new { @class = "form-control", @style = "min-width:200px", @placeholder = "Búsqueda" })
-                                <button class="btn btn-primary btn-sm my-0 p" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>}
-                        </form>
+                        </ul>
                     </div>
+                </nav>
+            </header>
+
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="~/AdminResources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>Nombre de usuario</p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Buscar...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+
+                        @*<li class="active">
+                                    <a href="#">
+                                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                        <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    </ul>
+                                </li>*@
+                        <li class=" treeview">
+                            <a href="#">
+                                <i class="fa fa-truck"></i>
+                                <span>Compras</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index", "Sell")"><i class="glyphicon glyphicon-shopping-cart"></i> Nueva compra</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-th-list"></i> Historial de compras</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Product")">
+                                <i class="glyphicon glyphicon-th-large"></i> <span>Productos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Warehouse")">
+                                <i class="glyphicon glyphicon-tag"></i> <span>Almacenes</span>
+                            </a>
+                        </li>
+                        <li class=" treeview">
+                            <a href="#">
+                                <i class="fa fa-user"></i>
+                                <span>Contactos</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                <li><a href="@Url.Action("Index", "Person")"><i class="glyphicon glyphicon-user"></i> Clientes</a></li>
+
+                                <li><a href="@Url.Action("Index", "Person")"><i class="glyphicon glyphicon-briefcase"></i> Proveedores</a></li>
+
+                            </ul>
+                        </li>
+                        <li class=" treeview">
+                            <a href="#">
+                                <i class="fa fa-dollar"></i> <span>Ventas</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index", "Sell")"><i class="fa fa-cart-plus"></i> Nueva venta</a></li>
+                                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Administrar ventas</a></li>
+                            </ul>
+                        </li>
+                        <li class=" treeview">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-bar-chart"></i> Reporte de ventas</a></li>
+                                <li><a href="#"><i class="fa fa-line-chart"></i> Reporte de compras</a></li>
+                                <li><a href="#"><i class="fa fa-bar-chart"></i> Reporte de inventario</a></li>
+                            </ul>
+                        </li>
+                        @*<li class=" treeview">
+                        <a href="#">
+                            <i class="fa fa-wrench"></i> <span>Configuración</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="business_profile.php"><i class="glyphicon glyphicon-briefcase"></i> Perfil de la empresa</a></li>
+                            <li><a href="currencies.php"><i class="fa fa-usd"></i> Monedas</a></li>
+                            <li><a href="templates.php"><i class="fa fa-file-pdf-o"></i> Plantillas</a></li>
+                        </ul>
+                    </li>*@
+                        <li class=" treeview">
+                            <a href="#">
+                                <i class="fa fa-lock"></i> <span>Administrar accesos</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                <li><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> Usuarios</a></li>
+
+                                <li><a href="@Url.Action("Index", "Role")"><i class="glyphicon glyphicon-briefcase"></i> Roles</a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <div>
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Inventory System
+                            <small>Version 2.0</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                            <li class="active">Inicio</li>
+                        </ol>
+                    </section>
+                    <section class="content">
+                        @RenderBody()
+                    </section>
                 </div>
             </div>
-            <!-- Heading -->
-            <!--Grid row-->
-            <div class=" fadeIn">
-                @RenderBody()
-            </div>
-            <!--Grid row-->
+
         </div>
-    </main>
-    <!--Main layout-->
-    <!--Footer-->
-    <footer class="page-footer  text-center  font-small primary-color-dark darken-2 mt-4 wow fadeIn">
-        <!--Call to action-->
-        <div class="pt-4">
-        </div>
-        <!--/.Call to action-->
-        <hr class="my-4">
-        <!-- Social icons -->
-        <div class="pb-4">
-        </div>
-        <!-- Social icons -->
-        <!--Copyright-->
-        <div class="footer-copyright py-3">
-            © 2018 Copyright:
-            <a href="">Inventory System</a>
-        </div>
-        <!--/.Copyright-->
-    </footer>
-    <!--/.Footer-->
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script src="~/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script src="~/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script src="~/js/mdb.min.js"></script>
-    <!-- Initializations -->
-    <script type="text/javascript">
-        // Animations initialization
-        new WOW().init();
+       
+            <div class="control-sidebar-bg"></div>
 
-        $(function () {
-            setNavigation();
-        });
-
-        function setNavigation() {
-            var path = window.location.pathname;
-            path = path.replace(/\/$/, "");
-            path = decodeURIComponent(path);
-
-            $(".nav a").each(function () {
-                var href = $(this).attr('href');
-                if (path.substring(0, href.length) === href) {
-                    $(this).addClass('active');
-                }
-            });
-
-            $(".dropdown-menu a").each(function () {
-                var href = $(this).attr('href');
-                if (path.substring(0, href.length) === href) {
-                    $(this).closest('li').addClass('active');
-                }
-            });
-        }
-
-    </script>
-</body>
+            <!-- jQuery 3 -->
+            <script src="~/AdminResources/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstra 3.3.7 -->
+            <script src="~/AdminResources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- FastClick -->
+            <script src="~/AdminResources/bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="~/AdminResources/dist/js/adminlte.min.js"></script>
+            <!-- Sparklin -->
+            <script src="~/AdminResources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+            <!-- jvectormap  -->
+            <script src="~/AdminResources/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+            <script src="~/AdminResources/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+            <!-- SlimScroll -->
+            <script src="~/AdminResources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- ChartJS -->
+            <script src="~/AdminResources/bower_components/chart.js/Chart.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="~/AdminResources/dist/js/demo.js"></script>
+    </body>
 </html>
+
