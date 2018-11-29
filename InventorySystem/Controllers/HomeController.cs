@@ -17,7 +17,7 @@ namespace InventorySystem.Controllers
             if (!string.IsNullOrEmpty(SearchText))
             {
                 //  var result = db.inventario_v.ToList().Where(s => s.Producto.Contains(SearchText));
-                var result = db.Product_t.ToList().Where(s => s.name.Contains(SearchText));
+                var result = db.Product_t.ToList().Where(s => s.name.ToLower().Contains(SearchText.ToLower()));
 
                 return View(result.ToList());
             }
