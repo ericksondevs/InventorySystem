@@ -9,7 +9,15 @@ namespace InventorySystem.Models.ViewModels
 {
     public class SellViewModel
     {
+        public SellViewModel()
+        {
+            this.Sells = new List<Sell_t>();
+        }
+
         public int Id { get; set; }
+
+        [DisplayName("Producto")]
+        public string product { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [DisplayName("total")]
@@ -19,7 +27,8 @@ namespace InventorySystem.Models.ViewModels
         [DisplayName("monto")]
         public double cash { get; set; }
 
-        public string discount { get; set; }
+        [DisplayName("Descuento")]
+        public double discount { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [DisplayName("Cliente")]
@@ -29,8 +38,6 @@ namespace InventorySystem.Models.ViewModels
         [DisplayName("Tipo de Operacion")]
         public int Operation_type_Id { get; set; }
 
-        [Required(ErrorMessage = "Este campo es obligatorio")]
-        [DisplayName("Id del usuario")]
         public Nullable<int> user_id { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
@@ -44,6 +51,7 @@ namespace InventorySystem.Models.ViewModels
         public  Operation_type_t Operation_type_t { get; set; }
         public  User_t User_t { get; set; }
 
+        public Product_t Product_t { get; set; }
 
 
     }

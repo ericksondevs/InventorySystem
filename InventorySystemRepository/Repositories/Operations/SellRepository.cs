@@ -17,7 +17,7 @@ namespace InventorySystemRepository.Repositories.Operations
         public string CreateOperation(Sell_t sell, Operation_t op)
         {
             var product = this.context.Set<Product_t>().Where(x => x.product_id == op.product_id).First();
-            if (sell.Operation_type_Id == 1)
+            if (op.Operation_type_Id == 1)
             {
                 product.existence = (product.existence + (decimal)sell.total);
             }

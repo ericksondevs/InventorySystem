@@ -18,7 +18,6 @@ namespace InventorySystem.DataBase.MetaDataEntities
         [DisplayName("monto")]
         public double cash { get; set; }
 
-        [Required(ErrorMessage = "Este campo es obligatorio")]
         [DisplayName("descuento")]
         public string discount { get; set; }
 
@@ -29,9 +28,6 @@ namespace InventorySystem.DataBase.MetaDataEntities
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [DisplayName("Tipo de Operacion")]
         public int Operation_type_Id { get; set; }
-
-        [Required(ErrorMessage = "Este campo es obligatorio")]
-        [DisplayName("Id del usuario")]
-        public Nullable<int> user_id { get; set; }
+       
     }
 }

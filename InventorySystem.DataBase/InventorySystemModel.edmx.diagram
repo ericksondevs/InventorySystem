@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bdb39a9b842243dca181b9fe28f126cb" Name="Diagram1" ZoomLevel="49">
+      <Diagram DiagramId="bdb39a9b842243dca181b9fe28f126cb" Name="Diagram1" ZoomLevel="68">
         <EntityTypeShape EntityType="InventorySystemModel.Category_t" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InventorySystemModel.Employee_t" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="InventorySystemModel.inventario_v" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
@@ -20,16 +20,17 @@
         <AssociationConnector Association="InventorySystemModel.FK_pk_product_warehouse" ManuallyRouted="false" />
         <AssociationConnector Association="InventorySystemModel.FK_pk_user_role" ManuallyRouted="false" />
         <EntityTypeShape EntityType="InventorySystemModel.Operation_type_t" Width="1.5" PointX="8.375" PointY="1.25" />
-        <EntityTypeShape EntityType="InventorySystemModel.Person_t" Width="1.5" PointX="10" PointY="3.5" />
         <EntityTypeShape EntityType="InventorySystemModel.Operation_t" Width="1.5" PointX="7.5" PointY="9.75" />
         <AssociationConnector Association="InventorySystemModel.OperationProduct_t" />
         <AssociationConnector Association="InventorySystemModel.OperationOperation_type_t" />
-        <EntityTypeShape EntityType="InventorySystemModel.Sell_t" Width="1.5" PointX="12.25" PointY="2.375" />
+        <EntityTypeShape EntityType="InventorySystemModel.Person_t" Width="1.5" PointX="10" PointY="4.5" />
+        <EntityTypeShape EntityType="InventorySystemModel.Person_type_t" Width="1.5" PointX="10.5" PointY="8.625" />
+        <EntityTypeShape EntityType="InventorySystemModel.Sell_t" Width="1.5" PointX="12.125" PointY="1.125" />
         <AssociationConnector Association="InventorySystemModel.FK_SellOperation" />
         <AssociationConnector Association="InventorySystemModel.FK_SellOperation_type_t" />
-        <AssociationConnector Association="InventorySystemModel.FK_SellPerson_t1" />
-        <AssociationConnector Association="InventorySystemModel.FK_SellUser_t1" />
-      </Diagram>
+        <AssociationConnector Association="InventorySystemModel.FK_SellPerson_t" />
+        <AssociationConnector Association="InventorySystemModel.FK_SellUser_t" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

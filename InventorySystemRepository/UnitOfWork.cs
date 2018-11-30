@@ -1,5 +1,6 @@
 ﻿using InventorySystem.DataBase;
 using InventorySystemRepository.Repositories.Operations;
+using InventorySystemRepository.Repositories.WareHouse;
 using InventorySystemRepository.Security;
 using System;
 using System.Collections.Generic;
@@ -66,10 +67,56 @@ namespace InventorySystemRepository
             }
         }
 
+        private BaseRepository<Person_t> personRepository;
+
+        public BaseRepository<Person_t> PersonRepository
+        {
+            get
+            {
+                if (this.personRepository == null)
+                {
+                    this.personRepository = new BaseRepository<Person_t>(dbContext);
+                }
+                return personRepository;
+            }
+        }
+
+        private WareHouseRepository wareHouseRepository;
+
+        public WareHouseRepository WareHouseRepository
+        {
+            get
+            {
+                if (this.wareHouseRepository == null)
+                {
+                    this.wareHouseRepository = new WareHouseRepository(dbContext);
+                }
+                return wareHouseRepository;
+            }
+        }
+
         public void SaveChanges()
         {
             AddLogInfo();
-            dbContext.SaveChanges();
+
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
         }
 
         private bool disposed = false;
