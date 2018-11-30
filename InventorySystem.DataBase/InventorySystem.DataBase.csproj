@@ -75,12 +75,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InventorySystemModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MetaDataEntities\CategoryMetaData.cs" />
     <Compile Include="MetaDataEntities\EmployeeMetaData.cs" />
     <Compile Include="MetaDataEntities\PartialMetaDataClasses.cs" />
     <Compile Include="MetaDataEntities\PersonMetaData.cs" />
+    <Compile Include="MetaDataEntities\ProductMetaData.cs" />
     <Compile Include="MetaDataEntities\RoleMetaData.cs" />
     <Compile Include="MetaDataEntities\SellMetaData.cs" />
+    <Compile Include="MetaDataEntities\UnitMetaData.cs" />
     <Compile Include="MetaDataEntities\UserMetaData.cs" />
+    <Compile Include="MetaDataEntities\WarehouseMetaData.cs" />
     <Compile Include="Operation_t.cs">
       <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
@@ -88,6 +92,9 @@
       <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Person_t.cs">
+      <DependentUpon>InventorySystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Person_type_t.cs">
       <DependentUpon>InventorySystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Product_t.cs">

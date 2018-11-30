@@ -23,5 +23,16 @@ namespace InventorySystem.DataBase
     [MetadataType(typeof(PersonMetaData))]
     public partial class Person_t : BaseMetaDataEntity { }
 
+    [MetadataType(typeof(WarehouseMetaData))]
+    public partial class Warehouse_t : BaseMetaDataEntity { }
+
+    [MetadataType(typeof(ProductMetaData))]
+    public partial class Product_t : BaseMetaDataEntity { }
+
+    [MetadataType(typeof(UnitMetaData))]
+    public partial class Unit_t : BaseMetaDataEntity { }
+
+    [MetadataType(typeof(CategoryMetaData))]
+    public partial class Category_t : BaseMetaDataEntity { }
 }
 

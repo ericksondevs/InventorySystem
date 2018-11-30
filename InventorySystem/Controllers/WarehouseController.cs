@@ -7,17 +7,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventorySystem.DataBase;
+using InventorySystemRepository;
 
 namespace InventorySystem.Controllers
 {
     public class WarehouseController : Controller
     {
-        private InventorySystemEntities db = new InventorySystemEntities();
+        //private InventorySystemEntities db = new InventorySystemEntities();
+        UnitOfWork unit = new UnitOfWork();
 
         // GET: Warehouse
         public ActionResult Index()
         {
-            return View(db.Warehouse_t.ToList());
+           
+            return View(unit.WareHouseRepository.GetAll().ToList());
         }
 
         // GET: Warehouse/Details/5
@@ -27,7 +30,8 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Warehouse_t warehouse_t = db.Warehouse_t.Find(id);
+           
+            Warehouse_t warehouse_t = unit.WareHouseRepository.Get(x => x.warehouse_id == id);
             if (warehouse_t == null)
             {
                 return HttpNotFound();
@@ -46,12 +50,12 @@ namespace InventorySystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "warehouse_id,name,address,last_update_date,creation_Date,last_user_update")] Warehouse_t warehouse_t)
+        public ActionResult Create([Bind(Include = "warehouse_id,name,address")] Warehouse_t warehouse_t)
         {
             if (ModelState.IsValid)
             {
-                db.Warehouse_t.Add(warehouse_t);
-                db.SaveChanges();
+                unit.WareHouseRepository.Add(warehouse_t);
+                unit.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +69,7 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Warehouse_t warehouse_t = db.Warehouse_t.Find(id);
+            Warehouse_t warehouse_t = unit.WareHouseRepository.Get(x => x.warehouse_id == id);
             if (warehouse_t == null)
             {
                 return HttpNotFound();
@@ -78,12 +82,12 @@ namespace InventorySystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "warehouse_id,name,address,last_update_date,creation_Date,last_user_update")] Warehouse_t warehouse_t)
+        public ActionResult Edit([Bind(Include = "warehouse_id,name,address")] Warehouse_t warehouse_t)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(warehouse_t).State = EntityState.Modified;
-                db.SaveChanges();
+                unit.dbContext.Entry(warehouse_t).State = EntityState.Modified;
+                unit.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(warehouse_t);
@@ -96,7 +100,7 @@ namespace InventorySystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Warehouse_t warehouse_t = db.Warehouse_t.Find(id);
+            Warehouse_t warehouse_t = unit.WareHouseRepository.Get(x => x.warehouse_id == id);
             if (warehouse_t == null)
             {
                 return HttpNotFound();
@@ -109,9 +113,9 @@ namespace InventorySystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Warehouse_t warehouse_t = db.Warehouse_t.Find(id);
-            db.Warehouse_t.Remove(warehouse_t);
-            db.SaveChanges();
+            Warehouse_t warehouse_t = unit.WareHouseRepository.Get(x => x.warehouse_id == id);
+            unit.WareHouseRepository.Remove(warehouse_t);
+            unit.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +123,7 @@ namespace InventorySystem.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unit.Dispose();
             }
             base.Dispose(disposing);
         }

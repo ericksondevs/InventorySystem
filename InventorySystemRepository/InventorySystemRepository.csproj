@@ -53,6 +53,7 @@
     <Compile Include="IBaseRepository.cs" />
     <Compile Include="Repositories\Operations\SellRepository.cs" />
     <Compile Include="Repositories\Security\LoginRepository.cs" />
+    <Compile Include="Repositories\WareHouse\WareHouseRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

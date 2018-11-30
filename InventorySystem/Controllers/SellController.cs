@@ -23,7 +23,8 @@ namespace InventorySystem.Controllers
         {
             SellViewModel sell = new SellViewModel()
             {
-                Sells = db.Sell_t.Include(s => s.Person_t).Include(s => s.Operation_type_t).Include(s => s.User_t).ToList()
+                
+                Sells = db.Sell_t.Include(s => s.Person_t).Include(s => s.Operation_type_t).Include(s => s.Operation_t).Where(x=>x.Operation_type_Id == 2).ToList()
             };
 
             return View(sell);
@@ -47,7 +48,13 @@ namespace InventorySystem.Controllers
         // GET: Sell/Create
         public ActionResult Create()
         {
-            ViewBag.Person_Id = new SelectList(db.Person_t, "Id", "name");
+            SellViewModel sell = new SellViewModel()
+            {
+
+                Sells = db.Sell_t.Include(s => s.Person_t).Include(s => s.Operation_type_t).Include(s => s.Operation_t).Where(x => x.Operation_type_Id == 2).ToList()
+            };
+
+            ViewBag.Person_Id = new SelectList(db.Person_t.Where(x=>x.person_type ==1), "Id", "name");
             ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description");
             ViewBag.user_id = new SelectList(db.User_t, "user_id", "email");
             ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name");
@@ -59,9 +66,11 @@ namespace InventorySystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,total,cash,discount,Person_Id,Operation_type_Id,user_id,product_id")] SellViewModel sellVm)
+        public ActionResult Create([Bind(Include = "Id,total,cash,discount,Person_Id,Operation_type_Id,product_id")] SellViewModel sellVm)
         {
-            Sell_t sell = new Sell_t()
+           sellVm.user_id = Convert.ToInt32(User.Identity.Name);
+
+           Sell_t sell = new Sell_t()
             {
                 User_t = sellVm.User_t,
                 Person_t = sellVm.Person_t,
@@ -69,30 +78,44 @@ namespace InventorySystem.Controllers
                 cash = sellVm.cash,
                 discount = sellVm.discount,
                 Person_Id = sellVm.Person_Id,
-                Operation_type_Id = sellVm.Operation_type_Id,
+                Operation_type_Id = 2,
                 user_id = sellVm.user_id
             };
 
-            Operation_t op = new Operation_t();
-            op.product_id = sellVm.product_id;
-            op.Sell_Id = sell.Id;
-            op.Operation_type_Id = sell.Operation_type_Id;
-            string result = string.Empty;
-            if (ModelState.IsValid)
-            {
-                result = unit.SellRepository.CreateOperation(sell, op);
-                if (result == "OK")
-                {
-                    unit.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
+            sellVm.Sells.Add(sell);
 
-            ModelState.AddModelError("", "Error: " + result);
-            ViewBag.Person_Id = new SelectList(db.Person_t, "Id", "name", sellVm.Person_Id);
-            ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description", sellVm.Operation_type_Id);
-            ViewBag.user_id = new SelectList(db.User_t, "user_id", "email", sellVm.user_id);
-            ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name", sellVm.product_id);
+            return View(sellVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOperation(SellViewModel sellVm)
+        {
+            foreach (var sell in sellVm.Sells)
+            {
+                sellVm.user_id = Convert.ToInt32(User.Identity.Name);
+
+                Operation_t op = new Operation_t();
+                op.product_id = sellVm.product_id;
+                op.Sell_Id = sell.Id;
+                op.Operation_type_Id = 2;
+                string result = string.Empty;
+                if (ModelState.IsValid)
+                {
+                    result = unit.SellRepository.CreateOperation(sell, op);
+                    if (result == "OK")
+                    {
+                        unit.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                ModelState.AddModelError("", "Error: " + result);
+                //ViewBag.Person_Id = new SelectList(db.Person_t.Where(x => x.person_type == 1), "Id", "name", sellVm.Person_Id);
+                //ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description", sellVm.Operation_type_Id);
+                //ViewBag.user_id = new SelectList(db.User_t, "user_id", "email", sellVm.user_id);
+                //ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name", sellVm.product_id);
+            }
 
             return View(sellVm);
         }
@@ -109,7 +132,7 @@ namespace InventorySystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Person_Id = new SelectList(db.Person_t, "Id", "name", sell_t.Person_Id);
+            ViewBag.Person_Id = new SelectList(db.Person_t.Where(x => x.person_type == 1), "Id", "name", sell_t.Person_Id);
             ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description", sell_t.Operation_type_Id);
             ViewBag.user_id = new SelectList(db.User_t, "user_id", "email", sell_t.user_id);
             ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name", sellVm.product_id);
@@ -122,7 +145,7 @@ namespace InventorySystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,total,cash,discount,Person_Id,Operation_type_Id,user_id")] Sell_t sell_t)
+        public ActionResult Edit([Bind(Include = "Id,total,cash,discount,Person_Id,user_id")] Sell_t sell_t)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +153,7 @@ namespace InventorySystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Person_Id = new SelectList(db.Person_t, "Id", "name", sell_t.Person_Id);
+            ViewBag.Person_Id = new SelectList(db.Person_t.Where(x => x.person_type == 1), "Id", "name", sell_t.Person_Id);
             ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description", sell_t.Operation_type_Id);
             ViewBag.user_id = new SelectList(db.User_t, "user_id", "email", sell_t.user_id);
             ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name", sellVm.product_id);
