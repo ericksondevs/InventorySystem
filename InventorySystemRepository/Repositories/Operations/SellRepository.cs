@@ -19,7 +19,7 @@ namespace InventorySystemRepository.Repositories.Operations
             var product = this.context.Set<Product_t>().Where(x => x.product_id == op.product_id).First();
             if (sell.Operation_type_Id == 1)
             {
-                product.existence =+ (decimal)sell.total;
+                product.existence = (product.existence + (decimal)sell.total);
             }
             else
             {if (product.existence != 0)
@@ -28,7 +28,7 @@ namespace InventorySystemRepository.Repositories.Operations
                     {
                         return $"La venta supera la cantidad total de este producto. Cantidad: {product.existence}";
                     }
-                    product.existence -=(decimal)sell.total;
+                    product.existence = (product.existence - (decimal)sell.total);
                 }
                 else
                 {
