@@ -52,6 +52,8 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="IBaseRepository.cs" />
     <Compile Include="Repositories\Operations\SellRepository.cs" />
+    <Compile Include="Repositories\ProductsRepo\ProductsRepo.cs" />
+    <Compile Include="Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Repositories\Security\LoginRepository.cs" />
     <Compile Include="Repositories\WareHouse\WareHouseRepository.cs" />
     <Compile Include="UnitOfWork.cs" />

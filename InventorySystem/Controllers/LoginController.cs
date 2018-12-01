@@ -39,9 +39,9 @@ namespace InventorySystem.Controllers
                 {
                     bool rememberme = Request.Form["rememberme"] != null && Request.Form["rememberme"] == "on";
 
-                    var user = unit.UserRepository.Get(x => x.email == u.email && x.password == u.password);
+                    var user = unit.UserRepository.Get(x => x.email.ToLower() == u.email.ToLower() && x.password.ToLower() == u.password.ToLower());
 
-                    this.SignInUser(user.user_id.ToString(), rememberme);
+                    this.SignInUser(user?.user_id.ToString(), rememberme);
                     //Redireccionar dependiendo Rol 
                     return this.RedirectToLocal("");
                 }

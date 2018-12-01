@@ -77,7 +77,6 @@ namespace InventorySystem.Controllers
         // GET: Sell/Create
         public ActionResult Create()
         {
-            SellVm.Sells = SellsList;
             ViewBag.Person_Id = new SelectList(db.Person_t.Where(x => x.person_type == 2), "Id", "name");
             ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description");
             ViewBag.user_id = new SelectList(db.User_t, "user_id", "email");
@@ -106,45 +105,27 @@ namespace InventorySystem.Controllers
                 user_id = sellVm.user_id
             };
 
-            SellsList.Add(sell);
+            Operation_t op = new Operation_t();
+            op.product_id = sellVm.product_id;
+            op.Sell_Id = sell.Id;
+            op.Operation_type_Id = 1;
+            string result = string.Empty;
+            if (ModelState.IsValid)
+            {
+                result = unit.SellRepository.CreateOperation(sell, op);
+                if (result == "OK")
+                {
+                    unit.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
 
+            ModelState.AddModelError("", "Error: " + result);
             ViewBag.Person_Id = new SelectList(db.Person_t.Where(x => x.person_type == 2), "Id", "name", sellVm.Person_Id);
             ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description", sellVm.Operation_type_Id);
             ViewBag.user_id = new SelectList(db.User_t, "user_id", "email", sellVm.user_id);
             ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name", sellVm.product_id);
 
-            return View(sellVm);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateOperation(SellViewModel sellVm)
-        {
-            foreach (var sell in SellsList)
-            {
-                sellVm.user_id = Convert.ToInt32(User.Identity.Name);
-
-                Operation_t op = new Operation_t();
-                op.product_id = sellVm.product_id;
-                op.Sell_Id = sell.Id;
-                op.Operation_type_Id = 1;
-                string result = string.Empty;
-                if (ModelState.IsValid)
-                {
-                    result = unit.SellRepository.CreateOperation(sell, op);
-                    if (result == "OK")
-                    {
-                        unit.SaveChanges();
-                        // return RedirectToAction("Index");
-                    }
-                }
-
-                ModelState.AddModelError("", "Error: " + result);
-                ViewBag.Person_Id = new SelectList(db.Person_t.Where(x => x.person_type == 2), "Id", "name", sellVm.Person_Id);
-                ViewBag.Operation_type_Id = new SelectList(db.Operation_type_t, "Id", "Description", sellVm.Operation_type_Id);
-                ViewBag.user_id = new SelectList(db.User_t, "user_id", "email", sellVm.user_id);
-                ViewBag.product_id = new SelectList(db.Product_t, "product_id", "name", sellVm.product_id);
-            }
             return View(sellVm);
         }
 
