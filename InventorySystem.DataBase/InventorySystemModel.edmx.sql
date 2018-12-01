@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/02/2018 23:52:38
--- Generated from EDMX file: C:\Users\erick\Source\repos\InventorySystem\InventorySystem.DataBase\InventorySystemModel.edmx
+-- Date Created: 11/30/2018 00:19:10
+-- Generated from EDMX file: C:\Users\Rafael Garcia\source\repos\InventorySystem\InventorySystem.DataBase\InventorySystemModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,20 +17,14 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_OperationOperation_type_t]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Operation_t] DROP CONSTRAINT [FK_OperationOperation_type_t];
-GO
-IF OBJECT_ID(N'[dbo].[FK_OperationProduct_t]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Operation_t] DROP CONSTRAINT [FK_OperationProduct_t];
+IF OBJECT_ID(N'[dbo].[FK_pk_product_caterogy]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Product_t] DROP CONSTRAINT [FK_pk_product_caterogy];
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_employee_user]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Employee_t] DROP CONSTRAINT [FK_pk_employee_user];
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_employee_warehouse]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Employee_t] DROP CONSTRAINT [FK_pk_employee_warehouse];
-GO
-IF OBJECT_ID(N'[dbo].[FK_pk_product_caterogy]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Product_t] DROP CONSTRAINT [FK_pk_product_caterogy];
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_product_unit]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Product_t] DROP CONSTRAINT [FK_pk_product_unit];
@@ -40,6 +34,12 @@ IF OBJECT_ID(N'[dbo].[FK_pk_product_warehouse]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_pk_user_role]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[User_t] DROP CONSTRAINT [FK_pk_user_role];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OperationProduct_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operation_t] DROP CONSTRAINT [FK_OperationProduct_t];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OperationOperation_type_t]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operation_t] DROP CONSTRAINT [FK_OperationOperation_type_t];
 GO
 IF OBJECT_ID(N'[dbo].[FK_SellOperation]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Operation_t] DROP CONSTRAINT [FK_SellOperation];
@@ -67,23 +67,11 @@ GO
 IF OBJECT_ID(N'[dbo].[inventario_v]', 'U') IS NOT NULL
     DROP TABLE [dbo].[inventario_v];
 GO
-IF OBJECT_ID(N'[dbo].[Operation_t]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Operation_t];
-GO
-IF OBJECT_ID(N'[dbo].[Operation_type_t]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Operation_type_t];
-GO
-IF OBJECT_ID(N'[dbo].[Person_t]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Person_t];
-GO
 IF OBJECT_ID(N'[dbo].[Product_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Product_t];
 GO
 IF OBJECT_ID(N'[dbo].[Role_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Role_t];
-GO
-IF OBJECT_ID(N'[dbo].[Sell_t]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Sell_t];
 GO
 IF OBJECT_ID(N'[dbo].[Unit_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Unit_t];
@@ -93,6 +81,18 @@ IF OBJECT_ID(N'[dbo].[User_t]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Warehouse_t]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Warehouse_t];
+GO
+IF OBJECT_ID(N'[dbo].[Operation_type_t]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Operation_type_t];
+GO
+IF OBJECT_ID(N'[dbo].[Person_t]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Person_t];
+GO
+IF OBJECT_ID(N'[dbo].[Operation_t]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Operation_t];
+GO
+IF OBJECT_ID(N'[dbo].[Sell_t]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sell_t];
 GO
 
 -- --------------------------------------------------

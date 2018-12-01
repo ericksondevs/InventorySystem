@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\erickson_pena\Documents\Visual Studio 2017\Projects\InventorySystem-develop\InventorySystem.DataBase\InventorySystemModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Rafael Garcia\source\repos\InventorySystem\InventorySystem.DataBase\InventorySystemModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

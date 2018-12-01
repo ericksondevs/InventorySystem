@@ -118,7 +118,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="InventorySystemModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>InventorySystemModel.Designer.cs</LastGenOutput>
