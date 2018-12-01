@@ -1,5 +1,7 @@
 ﻿using InventorySystem.DataBase;
 using InventorySystemRepository.Repositories.Operations;
+using InventorySystemRepository.Repositories.Products;
+using InventorySystemRepository.Repositories.ProductsRepo;
 using InventorySystemRepository.Repositories.WareHouse;
 using InventorySystemRepository.Security;
 using System;
@@ -92,6 +94,33 @@ namespace InventorySystemRepository
                     this.wareHouseRepository = new WareHouseRepository(dbContext);
                 }
                 return wareHouseRepository;
+            }
+        }
+
+        private RepositoryProduct repositoryProducts;
+        public RepositoryProduct RepositoryProducts
+        {
+            get
+            {
+                if (this.repositoryProducts == null)
+                {
+                    this.repositoryProducts = new RepositoryProduct(dbContext);
+                }
+                return repositoryProducts;
+            }
+        }
+
+        private OperationsProduct operationsProduct;
+
+        public OperationsProduct OperationsProduct
+        {
+            get
+            {
+                if (this.operationsProduct == null)
+                {
+                    this.operationsProduct = new OperationsProduct(dbContext);
+                }
+                return operationsProduct;
             }
         }
 
