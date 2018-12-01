@@ -1,0 +1,61 @@
+﻿@model IEnumerable<InventorySystem.DataBase.Operation_t>
+
+@{
+    ViewBag.Title = "Movimientos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movimientos</h2>
+
+<p>
+    @Html.ActionLink("Print", "PrintProductDetail")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.last_update_date)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.creation_Date)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.last_user_update)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Product_t.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Operation_type_t.Description)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Sell_t.Id)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.last_update_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.creation_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.last_user_update)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Product_t.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Operation_type_t.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sell_t.Id)
+        </td>
+        <td>
+            @Html.ActionLink("Imprimir", "PrintProductDetail") |
+        </td>
+    </tr>
+}
+</table>
